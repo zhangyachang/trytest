@@ -1,0 +1,149 @@
+<!doctype html>  <!-- 声明文档类型-->
+<html>
+<head>
+    <!--声明当前页面的编码集：charset=gbk,gb2312(中文编码),utf-8国际编码-->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>HTMl模板</title> 
+    <meta name="Keyword" content="关键词,关键词">
+    <meta name="description" content="描述">
+    <!--样式-->
+    <style type='text/css'>
+    *{margin:0; padding:0;}
+    ul{list-style:none;}
+    a{text-decoration:none;}
+    .fl{float:left;}
+    .fr{float:right;}
+    .clearfix:after{content:""; display:block; clear:both;}
+
+    .box{
+        width:900px;
+        margin:50px auto;
+    }
+    .box input{
+        width:200px;
+        height:20px;
+    }
+    .box ul li:after{
+        content:"";
+        display:block;
+        clear:both;
+    }
+    .box ul li p{
+        float:left;
+        padding:10px 15px;
+        line-height:20px;
+        text-align:right;
+        border:1px solid #ccc;
+    }
+    .box ul li p:nth-child(1){
+        width:100px;
+        font-weight:bold;
+        font-size:14px;
+        background: #f1f1f1;
+    }
+    .box ul li p:nth-child(2){
+        width:700px;
+        min-height:20px;
+        line-height:20px;
+        text-align:left;
+        text-indent:40px;
+     }
+    </style>
+</head> 
+<body>
+    <div class="box">
+        <input type="text" placeholder="请输入单号" value="">
+        <button>查询快递</button>
+        <ul>
+            <li>
+                <p>提示信息</p>
+                <p class="info"></p>
+            </li>
+            <li>
+                <p>快递公司</p>
+                <p class="info"></p>
+            </li>
+            <li>
+                <p>单号</p>
+                <p class="info"></p>
+            </li>
+            <li>
+                <p>序号</p>
+                <p>物流情况（倒叙）</p>
+            </li>
+        </ul>
+        <ul class="content">
+
+        </ul>
+    </div>
+<script type="text/javascript">
+    var box = document.getElementsByClassName('box')[0],
+        val = document.getElementsByTagName('input')[0],
+        btn = document.getElementsByTagName('button')[0],
+        aInfo = document.getElementsByClassName('info'),
+        content = document.getElementsByTagName('ul')[1];
+
+    btn.onclick = function(){
+        var val1 = val.value;
+        console.log(val1)
+
+    //  秘钥 743b90372ab9429b92bbd12cd8b50880
+    //  887437034492317834
+
+        /*
+    https://route.showapi.com/64-19?com=auto&nu="+val1+"&showapi_appid=51371&showapi_test_draft=false&showapi_timestamp=20171204071813&showapi_sign=743b90372ab9429b92bbd12cd8b50880
+    */
+    var date = new Date(),
+        time = ''+date.getFullYear() + format(date.getMonth()+1)
+        +format(date.getDate())
+        +format(date.getHours())
+        +format(date.getMinutes())
+        +format(date.getSeconds()),
+        url = "https://route.showapi.com/64-19",
+        data = "com=auto&nu="+val1+"&showapi_appid=51371&showapi_test_draft=false&showapi_timestamp="+time+"&showapi_sign=743b90372ab9429b92bbd12cd8b50880";
+
+    console.log(time);
+
+        //ajax
+        var xhr = new XMLHttpRequest();
+        xhr.open("post",url);
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4){
+                if(xhr.status>=200 && xhr.status<300 || xhr.status=== 304){
+                    console.log(JSON.parse(xhr.responseText));
+                    var obj = JSON.parse(xhr.responseText);
+                    fn(obj)
+
+                }else{
+                    console.log("请求错误："+xhr.status);
+                }
+            }
+        }
+    }
+    //  3345079160945
+    function fn(obj){
+        console.log(obj)
+        aInfo[0].innerHTML = obj.showapi_res_body.msg;
+        console.log(obj.showapi_res_body.msg)
+        aInfo[1].innerHTML = obj.showapi_res_body.expTextName;
+        aInfo[2].innerHTML = obj.showapi_res_body.mailNo;
+
+        for(var key in obj.showapi_res_body.data){
+            content.innerHTML += '<li>' +
+                '<p>'+(key*1+1) +'</p>' +
+                '<p>'+obj.showapi_res_body.data[key].time+' '+obj.showapi_res_body.data[key].context +'</p></li>';
+        }
+
+
+    }
+
+    function format(n) {
+        return n<10?"0"+n:n+"";
+    }
+</script>
+	
+</body>	
+</html>
