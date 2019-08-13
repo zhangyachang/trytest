@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    /*
+      async函数的触发
+    */
+
+
+
+    async function async1() {
+      console.log('async1函数的触发');
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ status: 200, msg: '触发' });
+        }, 2000);
+      });
+      return '这样才是真正的结果吧';
+    }
+
+
+    async function async2() {
+      console.log('async2函数的触发');
+    }
+
+    async function async3() {
+      console.log('async3函数的触发');
+      let async1Result = await async1();
+      console.log('async1的结果' + async1Result);
+      console.log(async1Result);
+      let async2Result = await async2();
+      console.log('async2的结果' + async2Result);
+    }
+
+    async3();
+    console.log('执行完成');
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="box">box</div>
+  <script>
+
+    /*
+      一、Promise对象
+        Promise是异步编程的一种解决方案，比传统的解决方案--回调函数和事件--更合理和更强大。
+        它由社区最早提出和实现，ES6将其写进了语言标准，统一了用法，原生提供了Promise对象。
+
+        所谓Promise，简单的说就是一个容器，里面保存着某个未来才会结束的事件，(通常是一个异步操作)
+        的结果。从语法上来首Promise是一个对象，从它可以获取异步操作的消息。
+        Promise提供统一的API，各种异步操作都可以用同样的方法进行处理。
+
+        Promise对象有以下两个特点。
+        1.对象的状态不受外界影响。Promise对象代表一个异步操作，有三个状态：
+          pedding(进行中)
+          fulfilled(已完成)
+          rejected(已失败)
+          只有异步操作的结果，可以决定当前是哪一种状态，任何其它操作都无法改变这个状态。
+        2.一旦状态改变，就不会再变，任何时候都可以得到这个结果。
+          pedding-->fulfiled
+          pedding-->rejected
+          只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就成为resolved(已定型)。
+          如果改变已经发生了，再对Promise对象添加回调函数，也会立即得到这个结果，这与事件(Event)完全不同，
+            事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+
+          有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。
+          此外，Promise对象提供了统一的接口，使得异步操作更加容易。
+          缺点：
+            1.首先，无法取消Promise，一旦新建它就会立即执行，无法中途取消。
+            2.如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+            3.当处于pedding状态时，无法得知木点进展到哪一阶段(刚开始还是即将完成)。
+
+
+        二、代码
+          1.Promise对象是一个构造函数，用来生成Promise实例。
+          2.Promise新建后就会立即执行
+          3.注意调用resolve或reject并不会中介Promise的参数函数的执行。
+            resolve和reject是在本轮事件循环的莫为执行，总是晚于本轮事件循环。
+            一般来说，调用resolve()或reject以后，Promise的使命就完成了。后续操作应该放到then方法里面，
+            而不应该直接写在revolve或reject的后面，所以最好在它们前面加上return语句。
+
+        三、原型 Promise.prototype.then
+          1.then方法返回的是一个新的Promise实例(注意：不是原来的Promise实例)。因此可以采用链式写法、
+            即then方法后面再调用另一个then方法。
+        四、原型 Promise.prototype.catch
+          1. 如果一部操作抛出错误，状态reject，就会调用catch方法指定的回调函数。
+          2. 如果运行中抛出错误，也会被catch方法捕获
+          3. Promise对象的错误具有"冒泡性质"，会一直向后传递，直到被捕获为之。也就是说，错误总是会被下一个catch语句捕获。
+          4. 跟传统的try/catch代码块不同的是，如果没哟使用catch方法指定错误处理的回调函数，
+            Promise对象抛出的错误不会传递到代码外层，即不会有任何反应。通俗的说法就是“Promise 会吃掉错误
+          
+          Node中有一个 unhandledRejection 专门监听未捕获的reject错误。
+            process.on('unhandledRejection', function (err, p) {
+              throw err;
+            });
+          5. catch方法返回的还是一个Promise对象，因此后面还可以继续跟着写then方法。
+        
+        五、原型 Promise.prototype.finally()
+            finally方法用于指定不管Promise对象最后状态如何，都会执行的操作，该方法是ES2018引入标准的。
+            
+            1. finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的Promise状态到底是fulfilled还是rejected。
+              这表明，finally方法里面的操作，应该是与状态无关的，不依赖于Promise的执行结果。
+      
+              
+    */
+
+    const someAsyncThing = function () {
+      return new Promise(function (resolve, reject) {
+        // 下面一行会报错，因为x没有声明
+        setTimeout(() => {
+          resolve({ status: 200, msg: '成功' });
+        }, 3000);
+      });
+    };
+
+
+
+    someAsyncThing()
+      .then(res => {
+        console.log("成功");
+        console.log(res);
+      })
+      .catch(err => {
+        console.log('失败');
+        console.log(err);
+      })
+      .finally(res => {
+        console.log('最后执行的');
+        console.log(res);
+      })
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
