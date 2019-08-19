@@ -16,34 +16,44 @@
     */
 
 
+    // let p1 = () => {
+    //   return new Promise((resolve, reject) => {
 
-    async function async1() {
-      console.log('async1函数的触发');
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ status: 200, msg: '触发' });
-        }, 2000);
-      });
-      return '这样才是真正的结果吧';
+    //     setTimeout(() => {
+    //       resolve({status: false, message: '定时器错误'});
+    //     }, 2000);
+
+    //   });
+    // };
+
+
+    // let p2 = async function(){
+    //   let result = await p1();
+    //   console.log('p2错误了执行不到了吧');
+    //   return result;
+    // };
+
+    // async function fn(){
+    //   try{
+    //     let result = await p2();
+    //     console.log('成功了');
+    //     console.log(result);
+
+    //   }catch(error){
+    //     console.log('捕获错误了');
+    //     console.log(error);
+    //   }
+    // }
+
+    // fn();
+
+
+    async function timeout() {
+      await 'hello world'
     }
-
-
-    async function async2() {
-      console.log('async2函数的触发');
-    }
-
-    async function async3() {
-      console.log('async3函数的触发');
-      let async1Result = await async1();
-      console.log('async1的结果' + async1Result);
-      console.log(async1Result);
-      let async2Result = await async2();
-      console.log('async2的结果' + async2Result);
-    }
-
-    async3();
-    console.log('执行完成');
-
+    let a = timeout();
+    console.log(a);
+    console.log('虽然在后面，但是我先执行');
 
   </script>
 </body>
