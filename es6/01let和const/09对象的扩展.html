@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    #box{
+      height: 200px;
+    }
+    #wrap{
+      height: 100%;
+      overflow: auto;
+    }
+
+  
+  </style>
 </head>
 
 <body>
@@ -13,7 +24,7 @@
     /*
       对象的扩展
         对象是JavaScript最重要的数据结构。ES6对它进行了重大升级。
-      
+
       一、属性的简洁表示法
         ES6允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。
           const foo = 'bar';
@@ -22,7 +33,7 @@
 
           // 等同于
           const baz = {foo: foo};
-        
+
         上面代码表名，ES6
 
     */
@@ -54,53 +65,52 @@
     // 函数传递默认值
 
 
-    let p1 = () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ status: false, message: '请求出错啦' });
-        }, 3000);
-      })
-    };
+    // let p1 = () => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve({ status: false, message: '请求出错啦' });
+    //     }, 3000);
+    //   })
+    // };
 
-    let p2 = () => {
-      // return p1();
-      // return p1();
-      return new Promise((resolve, reject) => {
-        resolve(p1());
+    // let p2 = () => {
+    //   // return p1();
+    //   // return p1();
+    //   return new Promise((resolve, reject) => {
+    //     resolve(p1());
 
-        // .then(res => {
-        //   resolve(res);
-        // })
-        // .catch(err => {
-        //   reject(err);
-        // })
-      });
-    }
-
-
-    async function fn() {
-      try {
-        console.log(1);
-        let result = await p2()
-          // .then(res => {
-          //   console.log(res);
-          // })
-          // .catch(err => {
-          //   console.log(err);
-
-          // })
-        console.log(result);
-        console.log(2);
+    //     // .then(res => {
+    //     //   resolve(res);
+    //     // })
+    //     // .catch(err => {
+    //     //   reject(err);
+    //     // })
+    //   });
+    // }
 
 
-      } catch (error) {
-        console.log('捕获错误');
-        console.log(error)
-      }
-    }
+    // async function fn() {
+    //   try {
+    //     console.log(1);
+    //     let result = await p2()
+    //       // .then(res => {
+    //       //   console.log(res);
+    //       // })
+    //       // .catch(err => {
+    //       //   console.log(err);
 
-    fn();
+    //       // })
+    //     console.log(result);
+    //     console.log(2);
 
+
+    //   } catch (error) {
+    //     console.log('捕获错误');
+    //     console.log(error)
+    //   }
+    // }
+
+    // fn();
 
 
 
