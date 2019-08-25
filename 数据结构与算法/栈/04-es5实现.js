@@ -1,4 +1,4 @@
-/*
+
 var Stack = function () {
   var item = [];
   return {
@@ -10,7 +10,17 @@ var Stack = function () {
   }
 }
 
-*/
+
+
+let stack = Stack();
+
+let stack2 = Stack();
+
+console.log(stack);
+console.log(stack2);
+
+console.log(stack === stack2);
+
 
 
 /*;
