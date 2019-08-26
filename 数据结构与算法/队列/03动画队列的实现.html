@@ -60,11 +60,65 @@
       class _Queue extends Queue {
         constructor(props) {
           super(props);
+          this.isRun = false; // 动画是否在运行
+        }
+        // 遍历整个动画，并逐一执行
+        run() {
+          
+          if (this.isRun) return;
+          // 递归来完成动画队列的清空
+          this.isRun = true;
+          (function r(){
+            if(this.size()){
+              new Promise(this.dequeue())
+                .then(res => {
+                  r.call(this);
+                })
+            }else{
+              this.isRun = false;
+            }
+          }).call(this);
         }
       }
 
 
+      // 避免存储对外暴露
+      let dom = Symbol();
 
+      // 用来存储所有dom节点的动画队列
+      let animateQueue = new Map();
+
+      // Init类
+      class Init {
+        constructor(selector) {
+          this[dom] = document.querySelector(selector);
+        }
+        animate(options, time) {
+          // 判断dom节点是否注册过队列
+          !animateQueue.has(this[dom]) && animateQueue.set(this[dom], new _Queue());
+          // 获取dom节点的队列
+          let queue = animateQueue.get(this[dom]);
+          // 动画队列入队
+          queue.enqueue((res) => {
+            this[dom].style.transition = time / 1000 + 's';
+            this[dom].offsetTop;
+
+            for (let [attr, val] of Object.entries(options)) {
+              this[dom].style[attr] = val + 'px';
+            }
+            setTimeout(res, time);
+          });
+          // 动画队列调用
+          queue.run();
+
+          return this;
+        }
+      }
+
+
+      return function (selector) {
+        return new Init(selector);
+      }
 
 
     })();
@@ -74,15 +128,15 @@
       .animate({
         width: 400,
         height: 500
-      });
+      }, 3000);
 
     Aq('#box')
       .animate({
         width: 300
-      })
+      }, 2000)
       .animate({
         top: 100
-      });
+      }, 1000);
 
   </script>
 
