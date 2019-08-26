@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+  <script>
+
+    const Queue = (function () {
+      let sym = Symbol();
+
+
+      class Priority {
+        constructor(ele, pri) {
+          this.ele = ele;
+          this.pri = pri;
+        }
+      }
+
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+        enqueue(ele, priority) {
+          let node = new Priority(ele, priority);
+          let i = 0;
+          console.log('i = ' + i);
+          while (i < this.size()) {
+            if (this[sym][i].pri < priority) {
+              break;
+            }
+            i++;
+          }
+          this[sym].splice(i, 0, node);
+        }
+        dequeue() {
+          return this[sym].shift();
+        }
+        first() {
+          return this[sym][0];
+        }
+        clear() {
+          this[sym] = [];
+        }
+        size() {
+          return this[sym].length;
+        }
+        print() {
+          while (this.size()) {
+            console.log(this.dequeue());
+          }
+        }
+      }
+    })();
+
+
+    let queue = new Queue();
+    queue.enqueue('张三', 1);
+    queue.enqueue('张四', 2);
+    queue.enqueue('王五', 100);
+    queue.enqueue('李四', 5);
+    queue.enqueue('孤单', -1);
+    queue.enqueue('张四2', 2);
+
+
+    console.log('查看队列的值');
+    console.log(queue);
+
+    console.log('出队');
+    queue.print();
+    
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

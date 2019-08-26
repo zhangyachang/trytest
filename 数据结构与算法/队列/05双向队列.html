@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 双向队列
+
+    let Quele = (function () {
+
+      let sym = Symbol();
+
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+        // 从后入队
+        enqueueLast(ele) {
+          this[sym].push(ele);
+        }
+        // 从前入队
+        enqueueFirst(ele) {
+          this[sym].unshift(ele);
+        }
+        // 从队首出队
+        dequeueFirst() {
+          return this[sym].shift();
+        }
+        // 从队尾出队
+        dequeueLast() {
+          return this[sym].pop();
+        }
+        // 返回首部数据 不删除
+        front() {
+          return this[sym][0];
+        }
+        // 返回队尾数据 不删除
+        back() {
+          return this[sym][this[sym].length - 1];
+        }
+        // 返回队列长度
+        size() {
+          return this[sym].length;
+        }
+        // 从前向后打印
+        print() {
+          this[sym].forEach(v => {
+            console.log(v);
+          });
+        }
+      }
+    })();
+
+    let queue = new Quele();
+
+    queue.enqueueFirst(100);
+    queue.enqueueFirst(200);
+
+    queue.enqueueLast(333);
+
+
+
+    console.log(queue.size());
+
+    queue.print();
+
+
+
+  </script>
+
+</body>
+
+</html>

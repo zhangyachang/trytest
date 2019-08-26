@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    /*
+      队列 先进先出
+        入队 enqueue
+        出队 dequeue
+        返回队首数据，但不删除 first
+        清空 clear
+        长度 size
+    */
+
+    const Queue = (function () {
+      let sym = Symbol();
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+        enqueue(ele) {
+          this[sym].push(ele);
+        }
+        dequeue() {
+          return this[sym].shift();
+        }
+        first() {
+          return this[sym][0];
+        }
+        clear() {
+          this[sym] = [];
+        }
+        size() {
+          return this[sym].length;
+        }
+        print() {
+          this[sym].forEach(v => {
+            console.log(v);
+          });
+        }
+      }
+    })();
+
+
+    let queue = new Queue();
+    console.log(queue);
+
+    queue.enqueue(123);
+    queue.enqueue(22);
+    queue.enqueue(333);
+    queue.print();
+    console.log(queue);
+
+    console.log(queue.dequeue());
+    console.log(queue);
+
+    console.log(queue.first());
+
+    console.log(queue.size());
+
+    queue.clear();
+
+    console.log(queue);
+
+  </script>
+</body>
+
+</html>

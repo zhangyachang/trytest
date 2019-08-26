@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box"></div>
+
+  <script>
+    const Queue = (function () {
+      let sym = Symbol();
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+        enqueue(ele) {
+          this[sym].push(ele);
+        }
+        dequeue() {
+          return this[sym].shift();
+        }
+        first() {
+          return this[sym][0];
+        }
+        clear() {
+          this[sym] = [];
+        }
+        size() {
+          return this[sym].length;
+        }
+      }
+    })();
+
+
+
+    let Aq = (function () {
+
+      // 继承 Queue
+      class _Queue extends Queue {
+        constructor(props) {
+          super(props);
+        }
+      }
+
+
+
+
+
+    })();
+
+
+    Aq('#box')
+      .animate({
+        width: 400,
+        height: 500
+      });
+
+    Aq('#box')
+      .animate({
+        width: 300
+      })
+      .animate({
+        top: 100
+      });
+
+  </script>
+
+
+</body>
+
+</html>
