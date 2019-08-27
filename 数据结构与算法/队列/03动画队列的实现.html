@@ -64,7 +64,8 @@
         }
         // 遍历整个动画，并逐一执行
         run() {
-          
+          console.log('打印我');
+          console.log(this);
           if (this.isRun) return;
           // 递归来完成动画队列的清空
           this.isRun = true;
@@ -101,6 +102,8 @@
           // 动画队列入队
           queue.enqueue((res) => {
             this[dom].style.transition = time / 1000 + 's';
+            console.log('这个是什么');
+            console.log(this.offsetTop);
             this[dom].offsetTop;
 
             for (let [attr, val] of Object.entries(options)) {
