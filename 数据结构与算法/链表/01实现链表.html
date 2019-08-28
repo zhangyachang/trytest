@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    /*
+      链表：
+        添加节点 append
+        查找节点 find
+        指定数据后面添加节点 insert
+        移除指定数据对应的节点 remove
+        打印链 printf
+        返回链表长度
+    */
+
+
+    let LinkedList = (function () {
+      let HEAD = Symbol();
+
+      // 定义链表结构
+      class Node {
+        constructor(data) {
+          this.data = data;
+          this.next = null;
+        }
+      }
+
+      return class {
+        constructor() {
+          this[HEAD] = null;
+        }
+        // 添加节点
+        append(data) {
+          let node = new Node(data);
+          let head = this[HEAD];
+          // 判断有没有节点
+          if (head === null) {
+            // 没有HEAD节点
+            this[HEAD] = node;
+          } else {
+            // 有HEAD节点
+            while (head.next) {
+              head = head.next;
+            }
+            head.next = node;
+          }
+        }
+
+        // 查找节点
+        find(index) {
+          let i = 0;
+          let head = this[HEAD];
+          while (head) {
+            if (i === index) return head;
+            head = head.next;
+            i++;
+          }
+          return undefined;
+        }
+
+        // 插入
+        insert(index, data) {
+          let newNode = new Node(data);
+          if (index === 0) {
+            let head = this[HEAD];
+            // 判断是不是插入到第一个
+            this[HEAD] = newNode;
+            newNode.next = head;
+            return;
+          }
+          // 不是第一个
+          let beforeNode = this.find(index - 1);
+          let afterNode;
+
+          if (beforeNode) {
+            afterNode = beforeNode.next;
+            newNode.next = afterNode;
+            beforeNode.next = newNode;
+          } else {
+            throw new Error('beforeNode节点不存在');
+          }
+        }
+
+        // 打印
+        print() {
+          let head = this[HEAD];
+          while (head) {
+            console.log(head.data);
+            head = head.next;
+          }
+        }
+
+        // 返回节点长度
+        size() {
+          let i = 0;
+          let head = this[HEAD];
+          if (head === null) {
+            return 0;
+          }
+
+          while (head) {
+            head = head.next;
+            i++;
+          }
+          return i;
+        }
+      }
+    })();
+
+
+    let link = new LinkedList();
+
+    console.log(link);
+
+    link.append('王大');
+    link.append('赵二');
+    link.append('张三');
+    link.append('李四');
+
+    // console.log(link);
+    // console.log(link.find(0));
+    console.log(link.insert(4, '午五'));
+    link.print();
+    console.log(link.size());
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
