@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+const Queue = (function () {
+  let sym = Symbol();
+
+
+  class Priority {
+    constructor(ele, pri) {
+      this.ele = ele;
+      this.pri = pri;
+    }
+  }
+
+  return class {
+    constructor() {
+      this[sym] = [];
+    }
+    enqueue(ele, priority) {
+      let node = new Priority(ele, priority);
+      let i = 0;
+      console.log('i = ' + i);
+      while (i < this.size()) {
+        if (this[sym][i].pri < priority) {
+          break;
+        }
+        i++;
+      }
+      this[sym].splice(i, 0, node);
+    }
+    dequeue() {
+      return this[sym].shift();
+    }
+    first() {
+      return this[sym][0];
+    }
+    clear() {
+      this[sym] = [];
+    }
+    size() {
+      return this[sym].length;
+    }
+    print() {
+      while (this.size()) {
+        console.log(this.dequeue());
+      }
+    }
+  }
+})();
+
+
+    // 优先队列
+    const PriorityQueue = (function () {
+      let sym = Symbol();
+
+      class Priority {
+        constructor(data, pri) {
+          this.data = data;
+          this.pri = pri;
+        }
+      }
+
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+
+        // 入队
+        enqueue(data, pri) {
+          // 可以在入队的时候就排好顺序
+          let node = new Priority(data, pri);
+          let i = 0;
+          while (this[sym][i]) {
+            if (this[sym][i].pri < pri){
+              return this[sym].splice(i, 0, node);
+            }
+            i++;
+          }
+          this[sym].splice(i, 0, node);
+        }
+
+        // 出队
+        dequeue() {
+          return this[sym].shift();
+        }
+
+        first(){
+          return this[sym][0];
+        }
+
+        clear(){
+          this[sym] = [];
+        }
+
+        print(){
+          this[sym].forEach(v => {
+            console.log(v);
+          })
+        }
+      }
+
+    })();
+
+    let queue = new PriorityQueue();
+
+    console.log(queue);
+
+    queue.enqueue('王大', 100);
+    queue.enqueue('张三', 1);
+    queue.enqueue('张四', 2);
+    queue.enqueue('张四2', 2);
+    queue.enqueue('王大1', 1000);
+    console.log(queue);
+
+    console.log(queue.dequeue());
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

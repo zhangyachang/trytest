@@ -24,7 +24,7 @@ const Stack = (function () {
 
 
 // 判断一串文字是否为回文
-function isHuiwen(str){
+function isHuiwen(str) {
   let stack = new Stack();
 
   [...str].forEach(v => {
@@ -32,16 +32,13 @@ function isHuiwen(str){
   });
 
   let result = '';
-  while(stack.size()){
+  while (stack.size()) {
     result += stack.pop();
   }
 
   return result === str;
 }
 
-
-console.log(isHuiwen('sdfjsdf'));
-console.log(isHuiwen('上海自来水来自海上'));
 
 
 
