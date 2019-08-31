@@ -48,12 +48,74 @@
     // fn();
 
 
-    async function timeout() {
-      await 'hello world'
+    // async function timeout() {
+    //   await 'hello world'
+    // }
+    // let a = timeout();
+    // console.log(a);
+    // console.log('虽然在后面，但是我先执行');
+
+
+
+    async function fn() {
+      try {
+        let result = await axios(11);
+        console.log(result);
+
+
+        if(result.status === 200){
+          console.log(1111);
+        }
+      } catch (err) {
+        console.log('报错？')
+        console.log(err);
+      }
     }
-    let a = timeout();
-    console.log(a);
-    console.log('虽然在后面，但是我先执行');
+
+
+    fn();
+
+    
+
+    function f1n() {
+      console.log(1111);
+    }
+
+
+    function axios(n) {
+      // 如果超时 重定向 登录
+      if (n > 10) {
+        return;
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ status: 200, msg: '成功' });
+        }, 2000);
+      })
+    }
+
+
+
+
+    // http://fw.hhl1916.com/C/AXYb3fbIsV9tKZGgzMm_nXxc
+    // 
+    let str = `http://fw.hhl1916.com/C/AfPQL9s0c6aNKvjYCIE71okC`;
+    //  http://fw.hhl1916.com/Cow/CohigEpK8Z2Acsk7wKDEb9
+    console.log(str.length);
+
+
+
+
+
+
+
+
+    
+
+    
+
+
 
   </script>
 </body>

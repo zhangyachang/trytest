@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box"></div>
+
+  <script>
+
+
+
+    // 队列
+    const Queue = (function () {
+      let sym = Symbol();
+
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+        // 入队
+        enqueue(ele) {
+          this[sym].push(ele);
+        }
+        // 出队
+        dequeue() {
+          return this[sym].pop();
+        }
+        // 返回队首元素
+        first() {
+          return this[sym][0];
+        }
+        // 清空队列
+        clear() {
+          this[sym] = [];
+        }
+        // 队列长度
+        size() {
+          return this[sym].length;
+        }
+      }
+
+    })();
+
+    const Aq = (function () {
+
+      class extends Queue {
+        // 构造函数
+        constructor() {
+
+        }
+
+        // 运行
+        run() {
+
+        }
+
+      }
+
+      return function(){
+        return new 
+      }
+
+    });
+
+    // class Queue {
+    //   constructor() {
+
+    //   }
+    // }
+
+
+    var oBox = document.querySelector('#box');
+
+    document.onclick = function () {
+      oBox.style.transition = '3s';
+      oBox.style.top = '100px';
+      oBox.style.left = '200px';
+      console.log(oBox);
+
+    }
+
+
+
+    
+
+
+
+  </script>
+</body>
+
+</html>
