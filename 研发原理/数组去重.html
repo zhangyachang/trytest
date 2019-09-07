@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+
+    (function () {
+      var prop = Array.prototype;
+      prop.duplicate = function () {
+        var obj = {};
+        for (var i = 0; i < this.length; i++) {
+          var item = this[i];
+          if (typeof obj[item] !== 'undefined') {
+            // 如果已经存在
+            this[i] = this[this.length - 1];
+            this.length--;
+            i--;
+            continue;
+          }
+          // 如果不存在
+          obj[item] = item;
+
+        }
+        obj = null;
+        return this;
+      };
+    })();
+
+
+    var arr = [12, 3, 12, 1, 1, 2, 1, 213, 123, 12, 1231, 231, 23, 1];
+
+    console.log(arr);
+
+    var a = arr.duplicate();
+    console.log(a);
+    console.log(arr);
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    // async function fn(){
+    //   console.log(await fn1());
+
+    //   let a = await fn1();
+    //   console.log(a);
+
+    // }
+
+
+    // function fn1(){
+    //   console.log('普通函数');
+    //   return '123';
+    // }
+
+    // fn();
+
+    // let Person = (function () {
+    //   let sym = Symbol();
+    //   let arr = [];
+
+    //   return class Preson {
+    //     constructor() {
+    //       this[sym] = [];
+    //     }
+    //    i sdf(){
+    //       ths[sym] = [123];
+    //     }
+
+    //   }
+    // })();
+
+    // let a = new Person();
+
+    // console.log(a);
+
+    // console.log(a['Symbol()']);
+
+
+    // let a = function () {
+    //   return new Promise((resolve, reject) => {
+    //     resolve(console.log(2222));
+    //     console.log('1');
+    //   });
+    // }
+
+    
+
+    // let aaa = a();
+    // console.log(aaa);
+
+
+
+    let p1 = function(n){
+      return new Promise((resolve,reject) => {
+        // 异步函数
+        setTimeout(() => {
+          if(n > 10){
+            resolve({status: 200, msg: '成功'})
+          }else{
+            resolve({status: 400, msg: '失败'})
+          }
+          
+        }, 1000)
+      })
+    }
+
+    async function fn(){
+      try{
+        let a = await p1(5);
+        let b = await p2();
+        let c = await p3();
+        console.log(a);
+        if(a.status !== 200){
+          reutrn 
+        }
+      }catch(e){
+        console.log(e);
+      }
+    }
+
+
+    fn();
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

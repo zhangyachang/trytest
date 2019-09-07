@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <script>
+    // document.getElementsByTagName('input')[0].oninput = function (e) {
+    //   console.log('input');
+    //   console.log(e);
+    //   console.log(e.data.charCodeAt());
+    // };
+
+    // console.log('a'.charCodeAt());
+    // let str = `http://fw.hhl1916.com/C/AfPQL9s0c6aNKvjYCIE71okC`;
+    // let abc = `http://fw.hhl1916.com/C/AfPQL9s0c6aNKvjYCIE71okC`;
+    // let bcd = `http://fw.hhl1916.com/C/AfPQL9s0c6aNKvjYCIE71okC`;
+    // let efg = `http://fw.hhl1916.com/C/AVfm0igEpK8Z2Acsk7wKDEb9`;
+
+    // let egg = `http://fw.hhl1916.com/C/AVfm0igEpm0gEpmmk7wADmb9`;
+
+
+    // console.log(str.length);
+    // var a = {
+    //   hlappid: "hl013",
+    //   mxopenid: '2088122254067221',
+    //   orderType: 'SMG_USER_3',
+    //   orderid: "68285c2578a84a0590ac7ccce4f3fd5eb21b359cf5decf74a544a96cfc982833",
+    //   pay_platform: "ali",
+    //   shopid: "44",
+    //   sub_hlappid: "HL_16",
+    //   subject: "深圳中深烟草贸易中心特美思商场",
+    // };
+
+    // var ar = {
+    //   hlappid: "hl013",
+    //   mxopenid: "2088122254067221",
+    //   orderType: "SMG_USER_3",
+    //   orderid: "33ba1339731e0c8abe8b3e6368dbe00aec57fb9215c6dcfff4b229e16d4498e9",
+    //   pay_platform: "ali",
+    //   shopid: "44",
+    //   sub_hlappid: "HL_16",
+    //   subject: "深圳中深烟草贸易中心特美思商场",
+    // };
+
+
+
+
+
+    async function fn(){
+      let aa = await fn1();
+      console.log(aa);
+
+
+      console.log('后面这里永远么有执行');
+
+      fn2();
+      console.log(bb);
+    };
+
+
+    async function fn1(){
+      console.log('fn1执行');
+      await fn3();
+    }
+
+    async function fn2(){
+      console.log('fn2执行');
+    }
+    
+    async function fn3(){
+      console.log('fn3执行');
+      await new Promise((resovle, reject) => {
+        setTimeout(async () => {
+          console.log('定时器11');
+          
+          await fn4();
+          resovle({status: '定时器11'})
+
+          // console.log('定时器1111函数内部');
+          // console.log(bb)
+        }, 2000);
+      })
+    }
+
+    // require(''); module.exports  exports
+
+    // import {  } from "module";
+    // export default
+    // export const async  function
+
+    // Object.define
+
+    async function fn4(){
+      console.log('fn4执行');
+      let bb =  await new Promise((resovle, reject) => {
+        setTimeout(() => {
+          console.log('定时器22222');
+          resovle({status: '定时器22222'})
+        }, 2000);
+      })
+    }
+    
+
+    fn();
+
+    
+
+    // console.log(a);
+
+  </script>
+</body>
+
+</html>
