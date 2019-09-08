@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    /*
+      哈希表
+        哈希函数
+    */
+
+let HashTable = (function () {
+
+  let symbol = Symbol();
+
+  // 哈希函数
+  function HASH(key) {
+    let hash = 0;
+    [...key].forEach(v => {
+      hash += v.charCodeAt();
+    });
+    return hash;
+  }
+
+
+  let sym = Symbol();
+  return class {
+
+    constructor() {
+      this[sym] = [];
+    }
+
+    set(key, value) {
+      let hash = HASH(key);
+      // 如果值存在，则修改
+      // if(this[sym][hash]){
+      //   this[sym][hash] = value;
+      //   return ;
+      // }
+      this[sym][hash] = value;
+    }
+    get(key) {
+      let hash = HASH(key);
+      return this[sym][hash];
+    }
+  }
+
+})();
+
+let hash = new HashTable();
+
+console.log(hash);
+
+hash.set('zhang', 10086);
+hash.set('aa', 100);
+hash.set('bb', 200);
+
+
+console.log(hash.get('goudan'));
+console.log(hash.get('bb'));
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    /*
+      链表：
+        添加节点 append
+        查找节点 find
+        指定数据后面添加节点 insert
+        移除指定数据对应的节点 remove
+        打印链 printf
+        返回链表长度
+      */
+
+    const LinkedList = (function () {
+      console.log('链表');
+
+      // 链表的每一项的结构
+      class Node {
+        constructor(data) {
+          this.data = data;
+          this.next = null;
+        }
+      }
+
+      let HEAD = Symbol();
+      return class {
+        constructor() {
+          this[HEAD] = null;
+        }
+
+        // 追加一个新的节点
+        append(data) {
+          let node = new Node(data);
+          let head = this[HEAD];
+          // 将链表插入进来
+          if (!this[HEAD]) {
+            this[HEAD] = node;
+            return;
+          }
+
+          while (head.next) {
+            head = head.next;
+          }
+          head.next = node;
+        }
+
+        /**
+         * 查找节点 根据值查找
+         * @param {String} 值
+         * 
+         * @return {Object} 
+         *  存在 {index: 所在索引, node: 第一项匹配的node项}
+         *  不存在 undefined
+         */
+        find(key) {
+          let i = 0;
+          let head = this[HEAD];
+          if (!head) return undefined;
+
+          while (head.next) {
+            if (head.data === key) {
+              return {
+                index: i,
+                node: head
+              };
+            }
+            head = head.next;
+            i++;
+          }
+          return undefined;
+        }
+
+        // 查找节点 根据index查找
+        findIndex(index){
+          let head = this[HEAD];
+          let i = 0;
+          while(head){
+            if(i === index) return head;
+            head = head.next;
+            i++;
+          }
+          return undefined;
+        }
+        
+        // 指定节点前面插入一个
+        insert(index, key) {
+          // 查找到要插入的节点
+
+          if(index < 0){
+            throw new Error('插入的值必须大于等于0');
+            return ;
+          }
+          let node = new Node(key);
+
+          if(index === 0){
+            node.next = this[HEAD];
+            this[HEAD] = node;
+            return ;
+          }
+          console.log(index - 1);
+
+          // 要插入的节点
+          let beforeNode = this.findIndex(index - 1);
+          console.log('before');
+          console.log(beforeNode);
+
+          if(!beforeNode){
+            throw Error('前一项不存在');
+            return ;
+          }
+
+          if(!beforeNode.next){
+            beforeNode.next = node;
+            return ;
+          }
+          // 走到这里就说明是存在了
+
+          node.next = beforeNode.next;
+          beforeNode.next = node;
+        }
+
+        /**
+         * 从链表中移除某一项
+         * @param {Number} index 索引
+         */
+        remove(index){
+          let head = this[HEAD];
+
+          // 如果一项也不存在 就退出
+          if(!head){
+            return ;
+          }
+
+          // 如果要移除的是第一项
+          if(index === 0){
+            this[HEAD] = head.next;
+          }
+          // 前一项 和后一项的值
+          let beforeNode = this.findIndex(index - 1);
+          if(!beforeNode || !beforeNode.next){
+            return ;
+          }
+          beforeNode.next = beforeNode.next.next;
+        }
+
+        // 打印链表的每一项
+        printf(){
+          let head = this[HEAD];
+          while(head){
+            console.log(head.data);
+            head = head.next;
+          }
+        }
+
+        // 打印链表的长度
+        size(){
+          let i = 0;
+          let head = this[HEAD];
+          while(head){
+            head = head.next;
+            i++;
+          }
+          return i;
+        }
+      }
+    })();
+    
+    // let link = new LinkedList();
+    // console.log(link);
+    // link.append('张大');
+    // link.append('张二');
+    // link.append('张三');
+    // link.append('张四');
+    // link.append('张5');
+
+    // console.log(link.findIndex(2));
+
+    // link.insert(2, '插入内容');
+
+    // link.printf();
+
+
+    // console.log(link);
+
+    // console.log(link.find('张二'));
+
+    // console.log(link.findIndex(0));
+
+    // // link.insert('');
+
+    // // link.printf();
+
+    
+    // console.log(link.size());
+
+    // console.log('移除一项');
+    // link.remove(2);
+    // console.log(link);
+    // link.printf();
+
+  </script>
+</body>
+
+</html>

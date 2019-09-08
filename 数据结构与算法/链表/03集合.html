@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    // console.log('集合');
+
+    // let set = new Set();
+
+    // console.log(set);
+    // set.add(100, 200);
+    // set.add(200);
+    // set.add(39);
+    // console.log(set);
+
+    // console.log(set.has(100));
+
+    // set.delete(100);
+
+    // console.log(set);
+
+
+    let a1 = [1, 2, 3, 4, 5];
+
+    let b1 = [2, 10, 4, 5, 200];
+
+    console.log(a1);
+    console.log(b1);
+
+
+    console.log(new Set([...a1, ...b1]));
+
+
+    // 求交集
+    function intersection(a, b) {
+      a = new Set([...a]);
+      b = new Set([...b]);
+      let set = new Set();
+      a.forEach(v => {
+        b.has(v) && set.add(v);
+      });
+      return set;
+    }
+
+    // 求差集
+    
+
+
+    console.log('交集');
+
+    console.log(intersection(a1, b1));
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

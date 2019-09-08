@@ -102,8 +102,7 @@
           // 动画队列入队
           queue.enqueue((res) => {
             this[dom].style.transition = time / 1000 + 's';
-            console.log('这个是什么');
-            console.log(this.offsetTop);
+            // 获取元素的东西 主动触发浏览器重绘
             this[dom].offsetTop;
 
             for (let [attr, val] of Object.entries(options)) {
@@ -117,7 +116,6 @@
           return this;
         }
       }
-
 
       return function (selector) {
         return new Init(selector);
