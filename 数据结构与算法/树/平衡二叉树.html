@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+
+    let AVL = (function () {
+
+      class TreeNode {
+        constructor(key) {
+          this.key = key;
+          this.lchild = null;
+          this.rchild = null;
+        }
+      }
+
+      // 插入节点的递归函数
+      let insertNode = function (root, node) {
+        if (!root) return node;
+        if (node.key < root.key) {
+          root.lchild = insertNode(root.lchild, node);
+          // 插入到左子树中
+          if (DeepTree(root.lchild) - DeepTree(root.rchild) > 1) {
+            // 这里就是失衡了
+            if (node.key < root.lchild.key) {
+              // LL
+              console.log('LL型失衡', );
+              root = LL(root);
+            } else {
+              // LR
+              console.log('LR型失衡');
+              root = LR(root);
+            }
+          }
+
+        } else {
+          root.rchild = insertNode(root.rchild, node);
+          // 插入到右子树中
+          if (DeepTree(root.rchild) - DeepTree(root.lchild) > 1) {
+            // 这里就是失衡了
+            if (node.key < root.rchild.key) {
+              // RL
+              console.log('RL型失衡');
+              root = RL(root);
+            } else {
+              // RR
+              console.log('RR型失衡');
+              root = RR(root);
+            }
+          }
+        }
+        return root;
+      };
+
+
+
+      // 调整树平衡的算法
+      let LL = function (root) {
+        // 失去平衡因子的最近的那个树
+        // 左子树
+        let lchild = root.lchild;
+        root.lchild = lchild.rchild;
+        lchild.rchild = root;
+        return lchild;
+      };
+
+      let LR = function (root) {
+        // 先将树改为 LL 型
+        root.lchild = RR(root.lchild);
+        // let lchild = root.lchild;
+        // root.lchild = lchild.rchild;
+        // lchild.rchild = null;
+        // root.lchild.lchild = lchild;
+        // 调用LL型调整规则
+        return LL(root);
+      };
+
+
+      let RR = function (root) {
+        let rchild = root.rchild;
+        root.rchild = rchild.lchild;
+        rchild.lchild = root;
+        return rchild;
+      };
+
+      let RL = function (root) {
+        // 先将RL型转换为RR型
+        root.rchild = LL(root.rchild);
+        // let rchild = root.rchild;
+        // root.rchild = rchild.lchild;
+        // rchild.lchild = null;
+        // root.rchild.rchild = rchild;
+        return RR(root);
+      };
+
+
+
+      // 检测树深度
+      let DeepTree = function (root) {
+        if (!root) return 0;
+        return Math.max(DeepTree(root.lchild), DeepTree(root.rchild)) + 1;
+      };
+
+
+      let ROOT = Symbol();
+      return class {
+        constructor() {
+          this[ROOT] = null;
+        }
+
+        // 插入一个节点
+        insert(key) {
+          let root = this[ROOT];
+          if (!root) {
+            this[ROOT] = new TreeNode(key);
+            return;
+          }
+          this[ROOT] = insertNode(root, new TreeNode(key));
+          // console.log('每一次的插入结果', JSON.stringify(this[ROOT]));
+        }
+
+        // 计算树的深度
+        deepTree() {
+          return DeepTree(this[ROOT]);
+        }
+      }
+    })();
+
+
+
+    let avl = new AVL();
+
+    // avl.insert(40);
+    // avl.insert(50);
+    // avl.insert(60);
+    // 16          
+    avl.insert(16);
+    avl.insert(3);
+    avl.insert(7);
+    avl.insert(11);
+    avl.insert(9);
+    avl.insert(26);
+    avl.insert(18);
+    avl.insert(14);
+    avl.insert(15);
+
+    console.log(avl);
+
+    // console.log('树的深度', avl.deepTree());
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    let AsyncQueue = (function () {
+      let sym = Symbol();
+      return class {
+        constructor() {
+          this[sym] = [];
+        }
+
+        /*
+          入队
+          @param {String} key
+          @param {Function} 要执行的操作
+          @param {Function} callback
+        */
+        enqueue(key, fn, cb) {
+          if(!this[sym][key]){
+            this[sym][key] = [];
+          }
+          
+          this[sym][key].push(fn);
+        }
+
+        dequeue() {
+
+        }
+
+      }
+    })();
+
+
+    let fnQueue = new AsyncQueue();
+
+    let obj = {
+      x: 1
+    };
+
+    fnQueue.enqueue('key1', function () {
+      console.log('入队代码');
+      setTimeout(() => {
+        obj.x = obj.x * 2;
+      }, 2000);
+    }, function () {
+      console.log('第1个函数的回调触发了');
+    })
+
+    fnQueue.enqueue('key1', function () {
+      console.log('入队代码');
+      setTimeout(() => {
+        obj.x = obj.x * 2;
+      }, 3000);
+    }, function () {
+      console.log('第二个函数的回调触发了');
+    });
+
+
+    fnQueue.enqueue('key1', function () {
+      console.log('入队代码');
+      setTimeout(() => {
+        obj.x = obj.x * 2;
+      }, 100);
+    }, function () {
+      console.log('第三个函数的回调触发了');
+    });
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+<textarea name="" id="textarea" cols="30" rows="10"></textarea>
+<button id="btn">反射型XSS攻击</button>
+<button id="btn1">DOM XSS攻击</button>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+
+  // var oTextarea = document.getElementById('textarea');
+
+  // document.getElementById('btn').addEventListener('click', function(){
+  //   console.log('发起请求了');
+  //   console.log(111);
+  //   console.log(oTextarea.value);
+
+  //   axios({
+  //     url: 'http://127.0.0.1:8001/bs/api/xss',
+  //     method: 'GET',
+  //     params: {
+  //       text: oTextarea.value
+  //     }
+  //   })
+  //     .then(res => {
+  //       console.log('成功');
+  //       console.log(res);
+  //       console.log(res.data.test);
+  //       var node = res.data.test;
+
+  //       document.body.insertAdjacentHTML('beforeend', node);
+        
+  //     })
+  //     .catch(err => {
+  //       console.log('失败');
+  //       console.log(err);
+  //     });
+  // });
+
+
+  // document.getElementById('btn1').addEventListener('click', function(){
+  //   console.log('点击了第二个按钮');
+  //   console.log(oTextarea.value);
+  //   let node = window.eval(oTextarea.value);
+  //   console.log('node');
+  //   console.log(node);
+
+  //   // var node =
+  //   window.alert(oTextarea.value);
+  // });
+
+
+
+  axios({
+    url: 'http://127.0.0.1:8001/bs/api/planDetail?pid=22fb9640-7a4b-11e9-956e-f9b01e6c5e40&date=2019-5-26',
+    headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzNzc0MTMwNEBxcS5jb20iLCJzZWNyZXQiOiLov5nph4znmoTmmK_np5jlr4bkv53lrZjnmoTlhbbku5bkv6Hmga8iLCJsYWxhIjoi6L-Y6IO95L-d5a2Y5YW25LuW5L-h5oGv5ZCXIiwiaWF0IjoxNTY4MDc4NTYzLCJleHAiOjE1NjgwODIxNjN9.BXcTw0_I-U_1d5otfpxiFI0Q-bA4yCS9XPS7CE-hIfA"}
+  })
+    .then(res => {
+      console.log('成功');
+      console.log(res)
+    })
+    .catch(err => {
+      console.log('失败');
+      if(err.response.status === 401){
+        console.log('token过期或无token');
+      }
+    })
+    
+    console.log('上传结果' + JSON.stringify({obj: '对象', name:'张三'}));
+    console.log('上传结果' , {obj: '对象', name:'张三'});
+
+</script>
+
+
+</body>
+
+</html>

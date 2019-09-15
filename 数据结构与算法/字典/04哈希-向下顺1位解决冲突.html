@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+  <script>
+
+
+
+let HashTable = (function () {
+
+  function HASH(key) {
+    let hash = 0;
+    [...key].forEach(v => {
+      hash += v.charCodeAt();
+    })
+    return hash % 37;
+  }
+
+  class ValuePair {
+    constructor(key, value) {
+      this.key = key;
+      this.value = value;
+    }
+  }
+
+  let sym = [];
+
+  return class {
+    constructor() {
+      this[sym] = [];
+    }
+
+    set(key, value) {
+      let hash = HASH(key);
+      let i = hash;
+      while (this[sym][hash]) {
+        // 如果存在 判断是否是相等的 如果是相等的则更新
+        if(this[sym][hash].key === key){
+          this[sym][hash].value = value;
+          return ;
+        }
+        hash = (hash + 1) % 37;
+        if (i === hash) {
+          throw new Error('哈希表已用完');
+          return;
+        }
+      }
+      this[sym][hash] = new ValuePair(key, value);
+    }
+
+    get(key) {
+      let hash = HASH(key);
+      let i = hash;
+      while(this[sym][hash]){
+        hash = (hash + 1) % 37;
+        if(i === hash){
+          throw new Error('不存在该内容');
+        }
+      }
+      return undefined;
+    }
+  }
+})();
+
+
+    let hash = new HashTable();
+
+    hash.set('abcd', '第一个');
+    hash.set('abcd', '第二个');
+    hash.set('bacd', '第三个');
+    hash.set('aaaa', '第三个');
+    hash.set('bbbb', '第三个');
+    hash.set('ccc', '第三个');
+    hash.set('aaa', '第三个');
+
+
+    console.log(hash);
+
+
+
+  
+
+
+  </script>
+
+
+</body>
+
+</html>
