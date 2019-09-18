@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+  <script>
+
+    // 图结构 类 无向图
+    let Graph = (function () {
+
+      // 队列类 辅助广度优先遍历
+      class Queue {
+        constructor() {
+          this.items = [];
+        }
+
+        enqueue(item) {
+          this.items.push(item);
+        }
+        dequeue() {
+          return this.items.shift();
+        }
+        size() {
+          return this.items.length;
+        }
+      }
+
+
+      // 栈类辅助优先存储
+      class Stack {
+        constructor() {
+          this.items = [];
+        }
+
+        push(data) {
+          this.items.push(data);
+        }
+
+        pop() {
+          return this.items.pop();
+        }
+
+        peek() {
+          return this.items[this.items.length - 1];
+        }
+
+        clear() {
+          this.items = [];
+        }
+        size() {
+          return this.items.length;
+        }
+      }
+
+
+      return class {
+        constructor() {
+          // 存储所有顶点
+          this.vertices = [];
+          // 存储每个顶点对应的相邻顶点(边)
+          this.edges = {};
+        }
+
+        // 添加顶点
+        addVertex(...rest) {
+          rest.forEach(v => {
+            // 如果顶点已经添加， return
+            if (this.vertices.includes(v)) return;
+
+            this.vertices.push(v);
+            // 初始化图的顶点信息
+            this.edges[v] = [];
+          });
+        }
+
+        // 添加边
+        addEdge(v1, v2) {
+          // 添加顶点
+          this.addVertex(v1, v2);
+          // this.edges[v1] || (this.edges[v1] = []);
+          // this.edges[v2] || (this.edges[v2] = []);
+          if (!this.edges[v1].includes(v2)) {
+            this.edges[v1].push(v2);
+            this.edges[v2].push(v1);
+          }
+        }
+
+        /*
+            广度优先遍历 
+            思路是 color 
+            white表示未被发现
+            grey 为被发现但是未被探索
+            black 为被发现 被探索
+            @param {String} 从哪一个顶点开始
+        */
+        bfs(v) {
+          let vertices = this.vertices;
+          let edges = this.edges;
+          let color = {};
+
+          // 判断节点是否存在
+          if (!vertices.includes(v)) {
+            throw new Error('图中不存在 ' + v + ' 顶点');
+          }
+
+          // 初始化节点探索状态
+          vertices.forEach(v => {
+            color[v] = 'white';
+          });
+
+          // 初始化队列
+          let queue = new Queue();
+
+          queue.enqueue(v);
+
+          while (queue.size()) {
+            let first = queue.dequeue();
+            let tips = '' + first + '===>';
+            edges[first].forEach(item => {
+              if (color[item] === 'white') {
+                // 入队未发现节点 并将节点状态改为被发现但未被探索
+                tips += item + ' ';
+                queue.enqueue(item);
+                color[item] = 'grey';
+              }
+            });
+
+            console.log(tips);
+            // 将当前节点状态改为已被探索
+            color[first] = 'black';
+          }
+        }
+
+        /*
+          深度优先遍历 使用栈结构表示
+    
+    
+          @param {String} 从哪个顶点开始遍历
+        */
+        dft(v) {
+          let vertices = this.vertices;
+          let edges = this.edges;
+          let color = {};
+
+          if (!vertices.includes(v)) {
+            throw new Error('图中不存在 ' + v + ' 顶点');
+          }
+
+          // 初始化辅助遍历的栈
+          let stack = new Stack();
+          let arr = []; // 辅助存储遍历顺序
+
+          // 初始化所有的元素为未被探索状态
+          vertices.forEach(v => {
+            color[v] = 'white';
+          });
+
+          // 初始顶点入栈
+          stack.push(v);
+          arr.push(v);
+
+          search(stack.peek());
+          function search(searchV) {
+            color[searchV] = 'grey';
+            // debugger
+            edges[searchV].forEach(item => {
+              let tips = ' ' + searchV + '====>';
+              if (color[item] === 'white') {
+                tips += item + ' ';
+                console.log(tips);
+                arr.push(item);
+                // console.log(object)
+                stack.push(item);
+                color[item] = 'grey';
+                search(item);
+              }
+            });
+            stack.pop(); // 遍历完成 出栈
+            color[searchV] = 'black';
+          }
+
+          return arr;
+        }
+      }
+
+    })();
+
+
+    let graph = new Graph;
+
+    graph.addEdge('A', 'E');
+    graph.addEdge('A', 'B');
+    graph.addEdge('A', 'C');
+    graph.addEdge('B', 'E');
+    graph.addEdge('B', 'E');
+    graph.addEdge('B', 'D');
+    graph.addEdge('C', 'F');
+    graph.addEdge('E', 'F');
+    graph.addEdge('E', 'B');
+
+    console.log('图结构', graph);
+
+    graph.bfs('A');
+
+    console.log('深度优先遍历');
+    let result = graph.dft('A');
+    console.log(result);
+
+  </script>
+
+
+
+</body>
+
+</html>

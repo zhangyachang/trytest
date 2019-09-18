@@ -22,21 +22,26 @@
 
     let BST = (function () {
 
-      // 队列结构
-      class Queue {
+      // 栈结构 用来辅助非递归遍历
+      class Stack {
         constructor() {
           this.items = [];
         }
-        enqueue(data) {
+        push(data) {
           this.items.push(data);
         }
-        dequeue() {
-          return this.items.shift();
+        pop() {
+          return this.items.pop();
+        }
+        peek() {
+          return this.items[this.items.length - 1];
         }
         size() {
           return this.items.length;
         }
       }
+
+
 
       let ROOT = Symbol();
 
@@ -184,23 +189,83 @@
 
         // 中序遍历二叉树
         inorderTraversal() {
-          let arr = [];
-          inorderTraversal(this[ROOT], arr);
+          // let arr = [];
+          // inorderTraversal(this[ROOT], arr);
+          // return arr;
+          console.log('中序非递归实现');
+
+
+          // 初始化用于辅助排序的栈
+          let stack = new Stack;
+
+          let p = null; // 用于指向当前遍历到的元素
+          let arr = []; // 用户记录排序的顺序
+          p = this[ROOT];
+
+          while (stack.size() || p !== null) {
+            while (p !== null) {
+              stack.push(p);
+              p = p.lchild;
+            }
+
+            // 如果栈不为空 出栈
+            if (stack.size()) {
+              p = stack.pop();
+              arr.push(p.key);
+              p = p.rchild;
+            }
+          }
           return arr;
         }
 
-        // 先序遍历二叉树
         preOrderTraversal() {
-          let arr = [];
-          preOrderTraversal(this[ROOT], arr);
+          console.log('先序遍历');
+          let root = this[ROOT];
+          // 初始化辅助遍历存储的栈
+          let stack = new Stack();
+
+          let arr = []; // 用于存储先序遍历的顺序
+
+          stack.push(root);
+
+          // 如果栈不为空 则一直走
+          while (stack.size()) {
+            let stackTop = stack.pop();
+
+            // 访问栈顶元素
+            arr.push(stackTop.key);
+            stackTop.rchild && stack.push(stackTop.rchild);
+            stackTop.lchild && stack.push(stackTop.lchild);
+          }
+
           return arr;
         }
 
         // 后续遍历
         lastOrderTraversal() {
-          let arr = [];
-          lastOrderTraversal(this[ROOT], arr);
-          return arr;
+          // let arr = [];
+          // lastOrderTraversal(this[ROOT], arr);
+          // return arr;
+          console.log('后续遍历');
+
+
+          // 初始化两个栈
+          let stack1 = new Stack;
+          let stack2 = new Stack;
+          let arr = []; // 用于存储遍历序列的
+
+          let root = this[ROOT];
+          stack1.push(root);
+
+          while (stack1.size()) {
+            let stackTop = stack1.pop();
+          
+            stack2.push(stackTop);
+            arr.push(stackTop.key);
+            stackTop.lchild && stack1.push(stackTop.lchild);
+            stackTop.rchild && stack1.push(stackTop.rchild);
+          }
+          return arr.reverse();
         }
 
         // 广度优先遍历
@@ -267,13 +332,16 @@
 
 
     console.log(bst);
+    let result1 = bst.preOrderTraversal();
+    console.log(result1);
 
+    let result = bst.lastOrderTraversal();
+    // 5, 13, 17, 18, 15, 10, 30, 20]
+    // 20, 30, 10, 15, 18, 17, 13, 5]
+    console.log(result);
 
     // let a = bst.inorderTraversal();
-    console.log('后续遍历');
-    let b = bst.lastOrderTraversal();
-    console.log(b);
-
+    // let b = bst.preOrderTraversal();
     // let c = bst.lastOrderTraversal();
 
     // console.log(a);
@@ -292,8 +360,8 @@
     // console.log(bst.remove(20));
     // console.log(bst);
 
-    console.log('广度优先遍历');
-    console.log(bst.breadthRirstSearch());
+    // console.log('广度优先遍历');
+    // console.log(bst.breadthRirstSearch());
 
 
 

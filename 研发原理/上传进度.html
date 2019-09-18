@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input type="file">
+  <button id="btn">点击发送</button>
+
+  <div id="box"></div>
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+
+    var oInput = document.getElementsByTagName('input')[0];
+    var oBtn = document.getElementById('btn');
+    var oBox = document.getElementById('box');
+
+
+    console.log(oInput, oBtn);
+
+
+
+    let CancelToken = axios.CancelToken;
+    var source = CancelToken.source();
+
+
+    oBtn.addEventListener('click', function () {
+      console.log('点击');
+
+      //通过FormData构建提交数据
+      var oFormData = new FormData();
+      oFormData.append('file', oInput.files[0]);
+
+      axios({
+        url: 'http://127.0.0.1:8001/bs/api/testUploadImg',
+        method: 'POST',
+        header: {
+          'Content-type': 'multipart/form-data'
+        },
+        cancelToken: source.token,
+        data: oFormData,
+        // 处理上传进度事件
+        onUploadProgress: function (e) {
+          console.log('当前进度' + e.loaded + '::: 总进度' + e.total)
+          console.log(((e.loaded / e.total) * 100).toFixed(2) + '%');
+        }
+      })
+        .then(res => {
+          console.log('请求成');
+          console.log(res);
+        })
+        .catch(err => {
+          console.log('请求事变');
+          console.log(err);
+        });
+
+
+      // var xhr = new XMLHttpRequest()
+      // xhr.onload = function () {
+      //   var data = JSON.parse(this.responseText);
+      //   console.log(data.mag + ':::' + data.url);
+      //   console.log('上传完成');
+      // }
+
+      // xhr.onload = function () {
+      //   var data = JSON.parse(this.responseText);
+      //   console.log(data.mag + ':::' + data.url);
+      //   console.log('上传完成')
+      // }
+
+      // console.log('uoload对象是什么', xhr.upload);
+      // var oUpload = xhr.upload;
+      // console.log(oUpload)
+      // oUpload.onprogress = function (e) { // 监听上传的进度
+      //   console.log('当前进度' + e.loaded + '::: 总进度' + e.total)
+      //   var scale = e.loaded / e.total; // 通过比例实现真正的上传的进度
+      //   oBox.style.width = scale * (box.offsetWidth) + 'px';
+      //   oBox.innerHTML = scale * 100 + '%';
+      // }
+
+      // xhr.open('post', 'http://127.0.0.1:8001/bs/api/testUploadImg', true);
+      // xhr.setRequestHeader('Content-type', 'multipart/form-data boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
+      // xhr.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzNzc0MTMwNEBxcS5jb20iLCJzZWNyZXQiOiLov5nph4znmoTmmK_np5jlr4bkv53lrZjnmoTlhbbku5bkv6Hmga8iLCJsYWxhIjoi6L-Y6IO95L-d5a2Y5YW25LuW5L-h5oGv5ZCXIiwiaWF0IjoxNTY4NzAyMjM4LCJleHAiOjE1Njg3MDU4Mzh9.-TurQkuBs6i4lpWAlPOXfYUW2iGmgUr_YTNTzGg5kec');
+
+      // //通过FormData构建提交数据
+      // var oFormData = new FormData();
+      // oFormData.append('file', oInput.files[0]);
+      // xhr.send(oFormData);
+
+      // setTimeout(() => {
+      //   console.log('取消');
+      //   xhr.abort();
+      // }, 50);
+
+    });
+
+
+
+
+
+    document.ondblclick = function () {
+      console.log('取消ajax请求');
+      source.cancel('Operation canceled by the user.');
+    }
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

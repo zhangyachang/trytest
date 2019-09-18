@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+  <script>
+
+    // 图结构 类 无向图
+    let Graph = (function () {
+
+      return class {
+        constructor() {
+          // 存储所有顶点
+          this.vertices = [];
+          // 存储每个顶点对应的相邻顶点(边)
+          this.edges = {};
+        }
+
+        // 添加顶点
+        addVertex(...rest) {
+          rest.forEach(v => {
+            // 如果顶点已经添加， return
+            if (this.vertices.includes(v)) return;
+
+            this.vertices.push(v);
+            // 初始化图的顶点信息
+            this.edges[v] = [];
+          });
+        }
+
+        // 添加边
+        addEdge(v1, v2) {
+          // 添加顶点
+          this.addVertex(v1, v2);
+          // this.edges[v1] || (this.edges[v1] = []);
+          // this.edges[v2] || (this.edges[v2] = []);
+          if (!this.edges[v1].includes(v2)) {
+            this.edges[v1].push(v2);
+            this.edges[v2].push(v1);
+          }
+        }
+      }
+
+    })();
+
+
+    let graph = new Graph;
+
+    graph.addEdge('A', 'E');
+    graph.addEdge('A', 'B');
+    graph.addEdge('A', 'C');
+    graph.addEdge('B', 'E');
+    graph.addEdge('B', 'E');
+    graph.addEdge('B', 'D');
+    graph.addEdge('C', 'F');
+    graph.addEdge('E', 'F');
+    graph.addEdge('E', 'B');
+
+
+    console.log('图结构', graph);
+
+graph = {
+  edges: {
+    A: ["E", "B", "C"],
+    B: ["A", "E", "D"],
+    C: ["A", "F"],
+    D: ["B"],
+    E: ["A", "B", "F"],
+    F: ["C", "E"]
+  },
+  vertices: ["A", "E", "B", "C", "D", "F"]
+}
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>
