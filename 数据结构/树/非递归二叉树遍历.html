@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let BST = (function () {
+
+      // 栈结构 用来辅助非递归遍历
+      class Stack {
+        constructor() {
+          this.items = [];
+        }
+        push(data) {
+          this.items.push(data);
+        }
+        pop() {
+          return this.items.pop();
+        }
+        peek() {
+          return this.items[this.items.length - 1];
+        }
+        size() {
+          return this.items.length;
+        }
+      }
+
+
+
+      let ROOT = Symbol();
+
+      // 节点结构
+      let BTNode = class {
+        constructor(key) {
+          this.key = key;
+          this.lchild = null;
+          this.rchild = null;
+        }
+      }
+
+      // 递归插入节点
+      let recursionInsert = function (root, node) {
+        if (node.key < root.key) {
+          if (root.lchild) {
+            recursionInsert(root.lchild, node);
+          } else {
+            root.lchild = node;
+          }
+        } else {
+          if (root.rchild) {
+            recursionInsert(root.rchild, node);
+          } else {
+            root.rchild = node;
+          }
+        }
+      };
+
+      // 二叉搜索树类
+      return class {
+        constructor() {
+          this[ROOT] = null;
+        }
+
+        // 插入
+        insert(key) {
+          let node = new BTNode(key);
+          let root = this[ROOT];
+          if (!root) {
+            this[ROOT] = node;
+            return;
+          }
+          // 递归插入
+          recursionInsert(root, node);
+        }
+
+
+        // 中序遍历二叉树
+        inorderTraversal() {
+          // 初始化用于辅助排序的栈
+          let stack = new Stack;
+
+          let p = null; // 用于指向当前遍历到的元素
+          let arr = []; // 用户记录排序的顺序
+          p = this[ROOT];
+
+          while (stack.size() || p !== null) {
+            while (p !== null) {
+              stack.push(p);
+              p = p.lchild;
+            }
+
+            // 如果栈不为空 出栈
+            if (stack.size()) {
+              p = stack.pop();
+              arr.push(p.key);
+              p = p.rchild;
+            }
+          }
+          return arr;
+        }
+
+        preOrderTraversal() {
+          let root = this[ROOT];
+          // 初始化辅助遍历存储的栈
+          let stack = new Stack();
+
+          let arr = []; // 用于存储先序遍历的顺序
+
+          stack.push(root);
+
+          // 如果栈不为空 则一直走
+          while (stack.size()) {
+            let stackTop = stack.pop();
+
+            // 访问栈顶元素
+            arr.push(stackTop.key);
+            stackTop.rchild && stack.push(stackTop.rchild);
+            stackTop.lchild && stack.push(stackTop.lchild);
+          }
+
+          return arr;
+        }
+
+        // 后续遍历
+        lastOrderTraversal() {
+          // 初始化两个栈
+          let stack1 = new Stack;
+          let stack2 = new Stack;
+          let arr = []; // 用于存储遍历序列的
+
+          let root = this[ROOT];
+          stack1.push(root);
+
+          while (stack1.size()) {
+            let stackTop = stack1.pop();
+
+            stack2.push(stackTop);
+            arr.push(stackTop.key);
+            stackTop.lchild && stack1.push(stackTop.lchild);
+            stackTop.rchild && stack1.push(stackTop.rchild);
+          }
+          return arr.reverse();
+        }
+
+        // 广度优先遍历
+        breadthRirstSearch() {
+          // 初始化用于广度优先遍历的队列
+          let queue = new Queue();
+          console.log('根节点', this[ROOT]);
+
+          let arr = [];
+          let root = this[ROOT];
+          if (!root) return;
+
+          queue.enqueue(root);
+
+          while (queue.size()) {
+            let queueFirst = queue.dequeue();
+            arr.push(queueFirst.key);
+            queueFirst.lchild && queue.enqueue(queueFirst.lchild);
+            queueFirst.rchild && queue.enqueue(queueFirst.rchild);
+          }
+
+          return arr;
+        }
+      }
+    })();
+
+
+    let bst = new BST();
+
+    bst.insert(20);
+    bst.insert(10);
+    bst.insert(5);
+    bst.insert(15);
+    bst.insert(13);
+    bst.insert(18);
+    bst.insert(17);
+    bst.insert(30);
+
+
+    console.log(bst);
+    let result = bst.preOrderTraversal();
+    console.log(result);
+
+
+  </script>
+</body>
+
+</html>
