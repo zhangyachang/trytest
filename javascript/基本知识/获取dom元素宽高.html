@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      padding: 10px 11px 12px 13px;
+      border-top: 10px solid red;
+      border-right: 20px solid blue;
+      border-left: 30px solid blue;
+      border-bottom: 23px solid yellow;
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <script>
+    var oDom = document.getElementById('box');
+
+    console.log(oDom);
+
+    oDom.onclick = function () {
+      console.log('点击事件');
+    };
+
+    document.onclick = function () {
+      console.log('点击事件');
+      console.dir(oDom);
+      // width + padding 
+      console.log('oDom.clientWidth', oDom.clientWidth);
+      console.log('oDom.clientHeight', oDom.clientHeight);
+      console.log('oDom.clientTop', oDom.clientTop);
+      console.log('oDom.clientLeft', oDom.clientLeft);
+      console.log('oDom.clientRight', oDom.clientRight);
+    };
+
+
+    // offset
+
+  </script>
+</body>
+
+</html>
