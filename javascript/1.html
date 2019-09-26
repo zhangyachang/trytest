@@ -10,17 +10,27 @@
 
 <body>
   <input type="text" id="input">
+  <button id="btn">点击</button>
   <script>
     var oInput = document.getElementById('input');
+    var oBtn = document.getElementById('btn');
 
     console.log(oInput);
 
-    oInput.onblur = function(e){
+    oInput.onblur = function (e) {
       console.log('失去焦点了');
       console.log(this);
       console.log(e.target.focus());
     };
-    
+
+
+    oBtn.addEventListener('click', function () {
+      console.log('1');
+      console.log(window.location.href);
+      
+    });
+
+
   </script>
 </body>
 
