@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    // 选择排序
+    function selectionSort(arr) {
+      var length = arr.length;
+      var minIndex, tmp;
+      console.time("选择排序耗时");
+      for (var i = 0; i < length - 1; i++) {
+        minIndex = i;
+        for (var j = i + 1; j < length; j++) {
+          if (arr[j] < arr[minIndex]) {
+            minIndex = j;
+          }
+        }
+        tmp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = tmp;
+      }
+      console.timeEnd("选择排序耗时");
+      return arr;
+    }
+
+    var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+    console.log(selectionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+
+
+
+
+  </script>
+</body>
+
+</html>

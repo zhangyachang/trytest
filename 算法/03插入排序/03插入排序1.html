@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+// 插入排序
+function insertionSort(arr) {
+  if (Object.prototype.toString.call(arr).slice(8, -1) === 'Array') {
+    console.time('插入排序耗时');
+    for (var i = 0, length = arr.length; i < length; i++) {
+      var key = arr[i];
+      var j = i - 1;
+      while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j--;
+      }
+      arr[j + 1] = key;
+    }
+    console.timeEnd('插入排序耗时');
+    return arr;
+  } else {
+    return `array is not an array`;
+  }
+}
+var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+console.log(insertionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+
+
+
+
+
+  </script>
+</body>
+
+</html>
