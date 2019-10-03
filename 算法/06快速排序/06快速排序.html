@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+function quickSort(arr, left, right) {
+  if (Object.prototype.toString.call(arr).slice(8, -1) === 'Array' && typeof length === 'number' && typeof right === 'number') {
+
+    // console.log('进来的数组', JSON.stringify(arr), 'left ==>', left, 'right===>', right);
+    if (left < right) {
+      var key = arr[left]; // 起始位置
+      var setPos = left + 1; // 设置的位置
+      var tmp;
+      for (var i = left + 1; i <= right; i++) {
+        if (arr[i] < key) {
+          tmp = arr[i]; // 交换位置，并将下次小于的位置+1
+          arr[i] = arr[setPos];
+          arr[setPos] = tmp;
+          setPos++;
+        }
+      }
+      // 循环完成之后将key与 pos-1的位置交换
+      arr[left] = arr[setPos - 1];
+      arr[setPos - 1] = key;
+      // console.log('每一次排序', '当前key值===>', key, '排序完成当前数组===>', JSON.stringify(arr));
+
+      quickSort(arr, left, setPos - 2);
+      quickSort(arr, setPos, right);
+      // console.log('arr=======>', arr);
+    }
+  } else {
+    return 'array is not an Array or left or right is not a number!';
+  }
+  return arr;
+}
+
+
+
+var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+// var arr = [7, 3, 2, 10, 13, 8, 5];
+console.log(quickSort(arr, 0, arr.length - 1));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
