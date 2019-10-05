@@ -13,15 +13,28 @@
 
 
 
-    function quickSort(arr) {
-      if (arr.length <= 1) { return arr };
-      var pivoIndex = Math.floor(arr.length / 2);
+function quickSort(arr) {
+  if (arr.length <= 1) { return arr };
+  var pivoIndex = Math.floor(arr.length / 2);
+  var pivot = arr.splice(pivoIndex, 1)[0]; // 将要选择排序的那一位选举出来 摘出来
+  var left = [];
+  var right = [];
 
-      
+  // 小的放左边，大的放右边
+  for (var i = 0, len = arr.length; i < len; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
     }
+  }
+  console.log('left', left, 'right', right);
+  return quickSort(left).concat([pivot], quickSort(right));
+}
 
-    var arr = [7, 3, 2, 10, 13, 8, 5];
-    console.log(quickSort(arr, 0, arr.length - 1));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+// var arr = [7, 3, 2, 10, 13, 8, 5];
+console.log(quickSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
 
 
 
