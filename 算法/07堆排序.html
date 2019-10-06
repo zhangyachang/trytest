@@ -13,46 +13,78 @@
 
 
 
-    function heapSort(array) {
-      console.log('这个东西 ===>', array);
-      // 建造堆
-      var heapSize = arr.length, temp;
-
-      for (var i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
-        heapify(array, i, heapSize);
-      }
-
-      // 堆排序
-      for (var j = heapSize - 1; j >= 1; j--) {
-        temp = array[0];
-        array[0] = array[j];
-        array[j] = temp;
-      }
-      heapify(arr);
-    }
     /*
-    @param {Array} arr 数组
-    @param {Number} x 数组下标
-    @param {Number} len 堆大小
+      方法说明：堆排序
+      @param {Array} arr 待排序数组
+    */
+
+    function heapSort(arr) {
+      console.log('堆排序');
+
+
+      console.log();
+      if (Object.prototype.toString.call(arr).slice(8, -1) === 'Array') {
+
+        var heapSize = arr.length;
+        var temp;
+
+        console.log('待排序数组的长度===>', heapSize);
+
+
+        console.log('建造之前的堆的样式', JSON.stringify(arr));
+        // 建造堆
+        for (var i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
+          heapify(arr, i, heapSize);
+        }
+        console.log('堆初始化完成之后的样式', JSON.stringify(arr));
+
+        // 现在要把最大的放到最后一个，最后一个放到第一个，把堆的大小减少一个，在慢慢的把最大的循环上去
+        console.time('堆排序耗时');
+        for (var j = heapSize - 1; j >= 1; j--) {
+          temp = arr[0];
+          arr[0] = arr[j];
+          arr[j] = temp;
+          heapify(arr, 0, --heapSize);
+        }
+        console.timeEnd('堆排序耗时');
+        return arr;
+      } else {
+        return 'array is not array';
+      }
+    }
+
+    /*
+      建堆：维护堆的性质
+      @param {Array} arr 数组
+      @param {Number} x 数组下标
+      @param {Number} len 堆大小
     */
     function heapify(arr, x, len) {
-      var l = 2 * x + 1;
-      var r = 2 * x + 2;
-      var largest = x;
-      var temp;
+      if (Object.prototype.toString.call(arr).slice(8, -1) === 'Array' && typeof x === 'number') {
+        var l = 2 * x + 1; // 左下标
+        var r = 2 * x + 2; // 右下标
+        var largest = x; // 默认最大的是父节点
+        var temp; // 用于交换数据存储的中间值
 
-      if (l < len && arr[l] > arr[largest]) {
-        largest = l;
+        // 寻找到一个堆中的最大值
+        if (l < len && arr[l] > arr[largest]) {
+          largest = l;
+        }
+        if (r < len && arr[r] > arr[largest]) {
+          largest = r;
+        }
+
+        // 如果最大者不是父节点 则交换位置
+        if (largest != x) {
+          temp = arr[x];
+          arr[x] = arr[largest];
+          arr[largest] = temp;
+          // 递归寻找
+          heapify(arr, largest, len);
+        }
+      } else {
+        return 'arr is not an array or x is not a number';
       }
-
-      if (r < len && arr[r] > arr[largest]) {
-        largest = r;
-      }
-
-      if (largest != x) {
-
-      }
-
     }
 
 
