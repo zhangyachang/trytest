@@ -11,39 +11,72 @@
 <body>
   <script>
 
-    // 层次遍历需要队列的辅助吧
 
 
-    let BinaryTree = (function () {
-      // 树节点
-      class Node {
-        constructor() {
-          this.val = x;
-          this.left = null;
-          this.right = null;
-        }
-      }
 
-      let ROOT = Symbol();
+
+    // 需要依靠队列来辅助
+    let Queue = (function () {
+
+      let sym = Symbol();
       return class {
         constructor() {
-          this[ROOT] = null;
+          this[sym] = [];
         }
 
-        // 添加节点 就直接以一个完全二叉树的顺序排列吧
-        insertNode(key) {
-          
+        enquque(key) {
+          this[sym].push(key);
         }
 
+        dequeue() {
+          return this[sym].shift();
+        }
 
+        first() {
+          return this[sym][this.size() - 1]
+        }
+
+        size() {
+          return this[sym].length;
+        }
+
+        clear() {
+          this[sym] = []
+        }
       }
-
-
-
-
-
-
     })();
+
+
+    function PrintFromTopToBottom(root) {
+      // write code here
+      console.log(root);
+
+
+      let queue = new Queue();
+
+      queue.enquque(root);
+      if (root.first().left) {
+        queue.left
+      }
+    }
+
+    function recursive(tree, queue){
+      if(tree.left){
+        queue.enquque(tree.left)
+      }
+      if(tree.right){
+        queue.enquque();
+      }
+      queue.enquque(tree.key);
+    }
+
+
+    let tree = {
+      val: '第一位',
+      left: { val: '第二位', left: '第四位', right: '第五位' },
+      right: { val: '第三位', left: '第6位', right: '第7位' }
+    };
+    PrintFromTopToBottom(tree);
 
 
 

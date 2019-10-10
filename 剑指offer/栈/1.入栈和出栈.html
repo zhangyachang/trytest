@@ -11,56 +11,56 @@
 <body>
   <script>
 
-    // 栈
-    let Stack = (function () {
-      let sym = Symbol();
-      return class Stack {
-        constructor() {
-          this[sym] = [];
-        }
-
-        push(key) {
-          this[sym].push(key);
-        }
-
-        pop() {
-          return this[sym].pop();
-        }
-
-        peek() {
-          return this[sym][this.size() - 1];
-        }
-
-        clear() {
-          this[sym] = [];
-        }
-
-        size() {
-          return this[sym].length;
-        }
-      }
-    })();
-
-    /*
-      由于上面定义了栈的数据结构，所以天才的我们就有了思路：
-      压入顺序，每次压入一个，都去判断它是不是目前出栈元素的第一个，如果不是，继续压入。
-      如果入栈元素是目前出栈元素的最前面的那一个，那么就让双方消消乐抵消，直到没有元素为止，根据入栈元素里面的是否为空来判断是否可行。
-    */
-    function IsPopOrder(pushV, popV) {
-      // write code here
-      var stack = new Stack();
-
-      let numFlag = 0; // 用一个flag标识当前对比到出栈元素的第几个了。
-      for (var i = 0; i < pushV.length; i++) {
-        let item = pushV[i];
-        stack.push(item);
-        while (stack.size() > 0 && stack.peek() === popV[numFlag]) {
-          stack.pop();
-          numFlag++;
-        }
-      }
-      return numFlag === popV.length;
+// 栈
+let Stack = (function () {
+  let sym = Symbol();
+  return class Stack {
+    constructor() {
+      this[sym] = [];
     }
+
+    push(key) {
+      this[sym].push(key);
+    }
+
+    pop() {
+      return this[sym].pop();
+    }
+
+    peek() {
+      return this[sym][this.size() - 1];
+    }
+
+    clear() {
+      this[sym] = [];
+    }
+
+    size() {
+      return this[sym].length;
+    }
+  }
+})();
+
+/*
+  由于上面定义了栈的数据结构，所以天才的我们就有了思路：
+  压入顺序，每次压入一个，都去判断它是不是目前出栈元素的第一个，如果不是，继续压入。
+  如果入栈元素是目前出栈元素的最前面的那一个，那么就让双方消消乐抵消，直到没有元素为止，根据入栈元素里面的是否为空来判断是否可行。
+*/
+function IsPopOrder(pushV, popV) {
+  // write code here
+  var stack = new Stack();
+
+  let numFlag = 0; // 用一个flag标识当前对比到出栈元素的第几个了。
+  for (var i = 0; i < pushV.length; i++) {
+    let item = pushV[i];
+    stack.push(item);
+    while (stack.size() > 0 && stack.peek() === popV[numFlag]) {
+      stack.pop();
+      numFlag++;
+    }
+  }
+  return numFlag === popV.length;
+}
 
 
     let a = IsPopOrder([1, 2, 3, 4, 5], [4, 5, 3, 2, 1]);
