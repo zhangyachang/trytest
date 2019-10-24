@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+
+
+
+    // 前端信息存在于localStorage中，防止一般人去篡改，加密
+    function encryption(code) {
+      var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+      for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+      }
+      return escape(c);
+    }
+    // 解密
+    function decrypt(code) {
+      code = unescape(code);
+      var c = String.fromCharCode(code.charCodeAt(0) - code.length);
+      for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1));
+      }
+      return c;
+    }
+
+    // 
+    var json = {
+      name: 'aaa',
+      age: 12
+    };
+    let a = encryption(JSON.stringify(json));
+    let b = encryption(a);
+    
+    console.log(a === b);
+
+    console.log(a);
+    console.log(b);
+
+    console.log(decrypt(b));
+    console.log(JSON.parse(decrypt(decrypt(b))));
+
+
+
+    console.log(JSON.stringify(123123123123));
+
+
+    
+
+
+
+
+
+  </script>
+</body>
+
+</html>
