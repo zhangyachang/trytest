@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var str = "红云红河集团/曲靖卷烟厂/制造一部;红云红河集团/集团总部";
+    var str1 = "红云红河集团/曲靖卷烟厂/制造一部"
+
+
+    console.log(str.substring(str.indexOf(';')));
+
+    
+    var item = str.split(';');
+    if (item.length > 1) {
+      console.log('大于')
+      item = item[0].split('/');
+      console.log(item[item.length - 1] + str.substring(str.indexOf(';')));
+    }else{
+      console.log('小于');
+      item = item[0].split('/');
+      console.log(item[item.length - 1])
+    }
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
