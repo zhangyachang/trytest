@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+
+
+
+    axios({
+      url: 'http://192.168.12.56:7012/zero-box/mailList?api=zero.box.excel.exportData&company_id=5db96406fb136867945e83a1&depid=1',
+      method: 'GET',
+      // cancelToken: source.token,
+      // data: oFormData,
+      // 处理上传进度事件
+      onUploadProgress: function (e) {
+        console.log('当前进度' + e.loaded + '::: 总进度' + e.total)
+        console.log(((e.loaded / e.total) * 100).toFixed(2) + '%');
+      },
+      onDownloadProgress: function(progress) {
+        console.log('下载进度==>', Math.round(progress.loaded / progress.total * 100) + '%');
+      }
+    })
+      .then(res => {
+        console.log('请求成');
+        console.log(res);
+      })
+      .catch(err => {
+        console.log('请求事变');
+        console.log(err);
+      });
+
+
+
+    document.onclick = function () {
+      console.log('打印');
+    };
+
+
+
+  </script>
+</body>
+
+</html>

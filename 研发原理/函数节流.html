@@ -50,9 +50,19 @@
       }
     };
 
-    document.onmousemove = throttle(function () {
-      console.log('函数触发了？')
+    // document.onmousemove = ;
+
+
+    let throFn = throttle(function () {
+      console.log('函数触发了？1111')
     }, 200);
+
+    // console.log('这个东西是什么', throFn);
+    // document.onclick = ;
+
+    // setInterval(throttle(() => {
+    //   console.log('函数触发了？')
+    // }, 200), 15)
 
 
     /*
@@ -78,7 +88,7 @@
     document.getElementById('btn').onclick = debounce(function () {
       this.innerHTML = '按钮' + num++;
     }, 200);
-    
+
 
   </script>
 </body>
