@@ -64,6 +64,13 @@
     console.log('解密', JSON.parse(decrypt(encryption(token1))));
 
     console.log('解密', JSON.parse(decrypt(token2)));
+
+
+
+    let test = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaWQiOiI1ZGI5NjQwNmZiMTM2ODY3OTQ1ZTgzYTEiLCJ1c2VyIjoi77-9XHUwMDEzIzNDUyIsImV4cGlyZXNJbiI6NjAwMDAwLCJpYXQiOjE1NzI5MjczMzF9.VaNLAeUqnVPqdhOWBnx7v1lX4n1xePt8KdRJAYQyWmqzXw9oN9RWldJmSDWBbTZo7SJz7cVpOl9yaOYq45ernyk3aMJ_k75UjVkBU4y6I93RSsy-PIinGm9ph1jGBGjW5sbBkobVep01gq61iEaxNxMIkIUp2NMlIn0nRFBuLuHUYLt1C04r0evY6Jc96SsM7gSwolYNQsveJmc8WaMrFb03empk-8ohqixteHBe5_35xDNNulArlIzfZQIoJ_2MJwqe3Lw0EEXzN1w27SXfRJnxe2WR14By4wr_vC85vsD9kJR-p_lYUsqQtWZIPD-iSJAySm2lSEUTwcupFwjdQw`;
+
+    console.log('加密', encryption(JSON.stringify(test)));
+
   
 
 
