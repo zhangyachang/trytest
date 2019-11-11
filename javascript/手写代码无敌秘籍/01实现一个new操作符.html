@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    /*
+      new 操作符执行了哪些事
+      
+        1.它创建了一个全新的对象。
+        2.它会执行[[Prototype]]也就是 __proto__ 链接
+        3.它使this指向新创建的对象
+        4.通过new创建的每个对象最终被[[Prototype]]链接到这个函数的prototype对象上
+        5.如果函数没有返回对象类型 Object（包含 Function,Array,Date,RegExp,Error），那么
+          new表达式中的函数调用将返回该对象引用
+    */
+
+
+
+    function New(func) {
+      var res = {};
+      if (func.prototype !== null) {
+        res.__proto__ = func.prototype;
+      }
+      var args = func.apply(res, Array.prototype.slice.call(arguments, 1));
+      if ((typeof args === 'object' || typeof args === 'function') && args !== null) {
+        return args;
+      }
+      return res;
+    }
+
+
+    function A(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    var obj = New(A, 1, 2);
+
+    console.log('第一个obj', obj);
+
+    let obj1 = new A(1, 2);
+    console.log('第二个obj', obj1);
+
+  </script>
+
+</body>
+
+</html>
