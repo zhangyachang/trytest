@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    // console.log(window.atob(window.atob("ZEc5dmNucGxjbTlOYjJKcGJHVTJOVFF6TWpFPQ==")).split("zeroMobile")[0].split("").reverse().join(""));
+    // console.log(window.atob(window.atob("ZEc5dmNucGxjbTlOYjJKcGJHVTJOVFF6TWpFPQ==")).split("zeroMobile")[1].split("").reverse().join(""));
+
+
+
+    function regHttp(url) {
+      return /^((https|http|ftp|rtsp|mms){0,1}(:\/\/){0,1})(www\.){0,1}(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~:\/])+(\.html){0,1}$/.test(url);
+    }
+    
+    var result = regHttp('http://zplus.top/lccom');
+    console.log(result);
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    class Person{
+      constructor({name, age}){
+        this.name = name;
+        this.age = age;
+      }
+      getInfo(){
+        console.log("姓名：" + this.name + "年龄：" + this.age);
+      }
+    }
+
+
+    class Student extends Person{
+      constructor({name, age, school}){
+        super({name, age});
+        this.name = name;
+        this.school = school;
+      }
+      getSchool(){
+        console.log("学校:" + this.school);
+      }
+
+      getName(){
+        console.log('子类中的name方法');
+      }
+    }
+
+    let user = new Student({
+      name: '张三',
+      age: 19,
+      school: '清华'
+    });
+
+    console.log(user);
+    user.getName();
+
+
+    var a = 7_1;
+    console.log(a);
+    
+
+
+  </script>
+</body>
+
+</html>

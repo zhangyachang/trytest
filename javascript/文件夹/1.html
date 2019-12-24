@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #inp{
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <input id="inp" type="text" autofocus="autofocus">
+  <script>
+    var oInp = document.getElementById('inp');
+
+    oInp.onblur = function(e){
+      e.target.focus();
+
+      // setTimeout(() => {
+      //   console.log('函数执行了吗', e.target);
+        
+      // }, 500);
+    };
+
+    oInp.onkeydown = function(e){
+      // console.log('键盘的onchange事件', e, e.keyCode);
+      if(e.keyCode === 9){
+        // console.log('失去焦点了');
+        console.log('二维码的内容==>', e.target.value);
+        e.target.value = "";
+        e.target.focus();
+        e.preventDefault();
+        return false;
+      }
+    }
+
+    // document.onclick = function(){
+    //   console.log('点击了获得焦点');
+    //   oInp.focus();
+    // }
+
+
+  </script>
+</body>
+
+</html>

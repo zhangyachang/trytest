@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // var corpData = [
+    //   {
+    //     "isCorp": true,
+    //     "depid": "1",
+    //     "name": "红云红河集团",
+    //     "show": false,
+    //     "children": [],
+    //     "type": "dep",
+    //     "isShowUpdate": false,
+    //     "_id": "5db96406fb136867945e83a2"
+    //   }
+    // ];
+
+
+    var corpData = [
+      {
+        "isCorp": true,
+        "depid": "1",
+        "name": "红云红河集团",
+        "show": true,
+        "type": "dep",
+        "isShowUpdate": false,
+        "_id": "5db96406fb136867945e83a2",
+
+        // 5db96406fb136867945e83a1
+        // 5db96406fb136867945e83a1
+
+        "children": [
+          {
+            "name": "测试",
+            "type": "dep",
+            "depid": "18767",
+            "show": false,
+            "parent_id": "1",
+            "isShowUpdate": false,
+            "_id": "5df0b0c7311ae2242851547d",
+            "children": []
+          }
+        ]
+      }];
+
+
+    console.log('集团组织架构', corpData);
+
+
+
+    /**
+   * 递归删除 修改部门名称 增加部门集团树中的某一个部门
+   */
+    function recursionDelDep({ corpData, depid, type, name, newDep }) {
+      for (let i = 0; i < corpData.length; i++) {
+        if (corpData[i].depid === depid) {
+          if (type === 'del') {
+            // 删除
+            corpData.splice(i, 1);
+          } else if (type === 'change') {
+            // 修改名称
+            corpData[i].name = name;
+          } else if (type === 'add') {
+            // 新增
+            if (corpData[i].children) {
+              corpData[i].children.push(newDep);
+            } else {
+              corpData[i].children = [];
+              corpData[i].children.push(newDep);
+            }
+          }
+          return;
+        }
+        if (corpData[i].children.length) {
+          this.recursionDelDep({
+            corpData: corpData[i].children,
+            depid,
+            type,
+            name,
+            newDep
+          });
+        }
+      }
+    }
+
+
+    // 现在就看传递的是什么参数了
+
+
+
+    let newDep1 = {
+      "depid": "87185",
+      "name": "测试aa",
+      "parentId": "18767",
+      "type": "dep",
+      "show": false,
+      "isShowUpdate": false
+    };
+
+    let newDep2 = {
+      "depid": "222222",
+      "name": "测试22222",
+      "parentId": "87185",
+      "type": "dep",
+      "show": false,
+      "isShowUpdate": false
+    };
+
+    let newDep3 = {
+      "depid": "333333",
+      "name": "测试333333",
+      "parentId": "222222",
+      "type": "dep",
+      "show": false,
+      "isShowUpdate": false
+    };
+
+    recursionDelDep({
+      "newDep": newDep1,
+      "corpData": corpData,
+      "depid": newDep1.parentId, // 父级部门
+      "type": "add" // 子集部门
+    });
+
+    recursionDelDep({
+      "newDep": newDep2,
+      "corpData": corpData,
+      "depid": newDep2.parentId, // 父级部门
+      "type": "add" // 子集部门
+    });
+
+    recursionDelDep({
+      "newDep": newDep3,
+      "corpData": corpData,
+      "depid": newDep3.parentId, // 父级部门
+      "type": "add" // 子集部门
+    });
+
+    // recursionDelDep({
+    //   "newDep": {
+    //     "depid": "222222",
+    //     "name": "测试aa的子部门",
+    //     "parentId": "87185",
+    //     "type": "dep",
+    //     "show": false,
+    //     "isShowUpdate": false
+    //   },
+    //   "corpData": corpData,
+    //   "depid": "87185", // 父级部门
+    //   "type": "add" // 子集部门
+    // });
+
+
+
+
+
+  </script>
+</body>
+
+</html>

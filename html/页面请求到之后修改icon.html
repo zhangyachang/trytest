@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" id="ico" href="<%= BASE_URL %>favicon.ico">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var ico = 'http://118.122.90.80/wework_admin/static/style/images/independent/mulit_logo/favicon_16h$e1750fed.png';
+
+    var oIco = document.getElementById('ico');
+    console.log(oIco);
+    setTimeout(() => {
+      console.log('修改');
+      oIco.href = ico;
+    }, 500);
+
+
+  </script>
+</body>
+
+</html>

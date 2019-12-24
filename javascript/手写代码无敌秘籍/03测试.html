@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let url = "http://www.jxbh.cn/illegal value.htm#start";
+    url = 'https://xi aoye121.com'
+    console.log(encodeURI(url));
+    console.log(encodeURIComponent(url));
+
+    console.log(window.btoa(url));
+
+
+
+
+    class Person {
+      constructor() {
+        console.log(arguments);
+
+      }
+      async eat() {
+        console.log('这个方法是哪里的方法');
+      }
+    }
+
+
+    let user = new Person({
+      a: 1,
+      b: 'str'
+    });
+
+    console.log(user);
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

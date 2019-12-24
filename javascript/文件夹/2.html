@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var arrObj = [
+      { id: 1, name: '小明', age: 12 },
+      { id: 2, name: '小红', age: 20 },
+      { id: 3, name: '小刚', age: 21 },
+    ];
+
+    arrObj.forEach((item, index) => {
+      if(item.id === 2){
+        return;
+      }
+      console.log(index);
+    });
+
+    // arrObj.map((item, index) => {
+    //   console.log(item, index);
+    //   // if(item.id === 1){
+    //   //   return ;
+    //   // }
+    // });
+
+
+  </script>
+</body>
+
+</html>
