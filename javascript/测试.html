@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    var person = {
+      name: 'zhang',
+      age: 12,
+      sayName(obj) {
+        console.log('实参是什么', obj);
+      }
+    };
+    Object.defineProperty(person, "name", {
+      // writable: false, // 是否允许修改
+      // configurable: false, // 是否可以删除
+
+      get: function (a, b, c) {
+        console.log('获取的时候', arguments);
+        console.log(a, b, c);
+        console.log(this);
+      },
+      set: function (newVal) {
+        throw new Error('the value is not allow change');
+      }
+    });
+
+    Object.defineProperty(person, "sayName", {
+      // writable: false, // 是否允许修改
+      // configurable: false, // 是否可以删除
+
+      // get: function (a, b, c) {
+      //   console.log('获取的时候', arguments);
+      //   console.log(a, b, c);
+      //   console.log(this);
+      //   return this.sayName;
+      // },
+      
+      set: function (newVal) {
+        throw new Error('the value is not allow change');
+      }
+    });
+
+
+
+    // 读取person.name
+    console.log(person.name);  // zhang
+    console.log(person.age); //12
+
+
+    person.sayName('11111');
+
+
+    // 修改person.name
+    // person.name = 'wang';
+    // person.age = 14;
+    // console.log(person.name);   // zhang  ?????? 咋没变
+    // console.log(person.age);  // 14
+    // 原因： 那个配置里面也说了的[[Writable]]默认是true，但是改为false之后 就是这个属性不可写,没有写进去的也可以看到是可以正常修改的
+
+
+  </script>
+</body>
+
+</html>

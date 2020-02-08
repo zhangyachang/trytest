@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // window.onbeforeprint = null;
+
+    function close() {
+      // console.log('执行此代码');
+      // alert("this is a test");
+      return "您输入的内容尚未保存，确定离开此页面吗？";
+    }
+    window.onbeforeunload = close;
+  </script>
+</body>
+
+</html>

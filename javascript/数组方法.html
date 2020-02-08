@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    let arr = [
+      { name: '张三', age: 12 },
+      { name: '张2', age: 13 },
+      { name: '张3', age: 14 },
+      { name: '张4', age: 15 },
+    ];
+
+    let result = arr.find(item => {
+      if (item.age == 13) {
+        return true;
+      }
+    });
+
+    console.log(result);
+
+    let result1 = arr.map(item => {
+      let obj = {};
+      obj.sex = '男';
+      obj.age = item.age + 10;
+      obj.name = item.name;
+      return obj;
+    });
+
+    console.log('处理结果', result1);
+    console.log(arr);
+
+
+    let reg = /^[a-zA-Z][a-zA-Z0-9_]*$/;
+    let regResult = reg.test('AAa');
+    console.log('验证结果', regResult);
+
+
+  </script>
+</body>
+
+</html>

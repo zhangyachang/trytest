@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+  <script>
+
+
+
+
+    const CancelToken = axios.CancelToken;
+    // var source = CancelToken.source();
+
+    let cancelObj = null;
+
+    // let a;
+    let a = axios({
+      url: 'http://192.168.12.233:3000/app/ddv1/getCorpid',
+      cancelToken: new CancelToken(function (msg) {
+        cancelObj = msg;
+      }),
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        if(axios.isCancel(err)){
+          console.log('请求被取消了');
+        }else {
+          console.log(err);
+        }
+
+      })
+    console.log(a);
+
+
+    setTimeout(() => {
+      console.log('取消');
+      cancelObj('请求终止');
+    }, 10);
+
+    // , {
+    //   // 必须对请求进行cancelToken设置
+
+    // }).catch(function (thrown) {
+    //   // 如果请求被取消则进入该方法判断
+    //   if (axios.isCancel(thrown)) {
+    //     console.log('Request canceled', thrown.message);
+    //   } else {
+    //     // handle error
+    //   }
+    // });
+    console.log('返回值', a);
+
+    // setTimeout(() => {
+    //   // 取消上面的请求
+    //   source.cancel('messge') // message为可选项，必须为String
+    // }, 20);
+
+
+
+
+
+
+     // const CancelToken = axios.CancelToken;
+    // var sourse = CancelToken.sourse();
+
+
+    // axios({
+    //   method: 'POST',
+    //   cancelToken: sourse.token,
+    //   url: 'http://127.0.0.1:3000/app/ddv1/sign',
+    //   data: {
+    //     url: 'http://ww.baidu.com'
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
+
+    // sourse.cancel();
+
+  </script>
+
+</body>
+
+</html>

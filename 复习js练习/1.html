@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>练习</title>
+  <script>
+    window.onload = function () {
+      console.log('window.onload 事件执行');
+    };
+  </script>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box">盒子模型</div>
+
+  <p>我是一个p标签</p>
+
+  <script>
+    var goudan = document.getElementById('box');
+
+    goudan.onmouseover = function () {
+      this.innerHTML = "大家好";
+      this.style.background = "red";
+    };
+
+    goudan.onmouseout = function () {
+      this.innerHTML = "";
+      this.style.background = "#999"
+    };
+    console.log('普通js执行');
+  </script>
+
+  <script src="./1.js"></script>
+</body>
+
+</html>
