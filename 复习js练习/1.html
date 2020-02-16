@@ -4,43 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>练习</title>
-  <style>
-    #box1,
-    #box2 {
-      width: 200px;
-      height: 50px;
-      margin: 50px auto;
-      padding: 5px 20px;
-      line-height: 50px;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      background-color: pink;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Document</title>
 </head>
 
 <body>
-
-  <div id="box">
-    <p>我是这里面的呢内容</p>
-    <h1>这是我的logo</h1>
-    <img src="images/5.jpg" />
-  </div>
-  <script type="text/javascript">
+  <div id="box"></div>
+  <script>
     var oBox = document.getElementById('box');
-    //console.log(oBox);
-    // console.log(oBox.innerText);   //返回的只是文本值吗？
-    // oBox.innerText += '11111';   //这个还会把标签给去掉？
-    // oBox.innerHTML += '11111';
-    oBox.innerText += 1;
-  </script>
+    oBox.addEventListener('click', function () {
+      console.log('打印内容');
+    });
 
-  <script src="./1.js"></script>
+    var a = 1;
+    console.log(a);
+
+
+  </script>
 </body>
 
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="app_table">
+
+      <div class="app_item" v-for="item in list" :key="item._id" v-html="<div>123123</div>">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+
+
+    var obj = {
+      list: [
+        {
+          _id: '111',
+          node: {
+            tagName: 'div',
+            name: '手机号码',
+            props: {
+              style: "color: green",
+              class: 'input_wrap'
+            }
+          },
+          children: [{
+            tagName: 'input',
+            name: '手机号码',
+            reg: 'phone', // 正则表达式，是否为手机邮箱等
+            props: {
+              style: "text-align: right;",
+              class: 'input',
+              placeholder: '请填写您的手机号码',
+              value: ''
+            }
+          }]
+        }
+      ]
+    }
+    
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list: obj.list
+      },
+      methods: {
+        fn() {
+          console.log('点击了我，打印内容');
+        }
+      }
+    })
+
+
+  </script>
+
+
+</body>
+
+</html>
