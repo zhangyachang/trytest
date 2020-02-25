@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var data = {
+      "node-start": { name: '开始' },
+      "node02": { name: 'node02' },
+      "node03": { name: 'node03' },
+      "node04": { name: 'node04' },
+      "node05": { name: 'node05' },
+      "node06": { name: 'node06' },
+      "node07": { name: 'node08' },
+    };
+
+    var obj = {
+      // 父节点      子节点
+      "node-start": ["node02"],
+      // "node01": ["node02", "node03"],
+      "node02": ["node05"],
+      "node05": ["node06"],
+      "node06": ["node-07", "node-08"]
+    };
+    var startName = "node-start";
+
+
+    
+    // var result = {};
+    // var middleObj = result;
+    // while (data[startName]) {
+    //   if (obj[startName].length > 1) {
+    //     for(var i=0;i<obj[startName].length;i++){
+
+    //     }
+    //   } else {
+    //     middleObj.childrenNode = data[startName];
+    //     startName = obj[startName];
+    //     middleObj = middleObj.childrenNode;
+    //   }
+    // }
+
+    // console.log('最终结果', result);
+
+    // function objToGraph(result, nextName) {
+    //   console.log('参数', result, nextName);
+    //   // console.log('result', result);
+    //   // console.log('result.childrenNode', result.childrenNode);
+
+
+    //   // result.childrenNode = data[nextName];
+    //   // console.log(obj[nextName].length);
+
+    //   if (obj[nextName] && obj[nextName].length >= 2) {
+    //     console.log(1111111111);
+    //     // for (let i = 0; i < obj[nextName].length; i++) {
+    //     //   console.log('1111');
+    //     // }
+    //   } else {
+    //     console.log('执行了吗', result);
+    //     // console.log(result.childrenNode);
+    //     result.childrenNode = data[nextName];
+    //     // result.childrenNode = {};
+    //     objToGraph(result.childrenNode, obj[nextName]);
+    //   }
+
+    //   console.log('结果', result);
+    //   // console.log(obj[nextName])
+    // }
+
+
+    // var result = {};
+    // objToGraph(result, "node-start");
+    // console.log(result);
+
+
+  </script>
+</body>
+
+</html>
