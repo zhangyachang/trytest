@@ -5,7 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
+  <style>
+    .wrap {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,15 +20,33 @@
 
   <script>
 
-
-    function fn({ title = "默认值", a="默认" }) {
-      console.log('函数执行', title);
-      console.log(a)
-    }
-
-    fn({a: 'a的值'});
-
-
+    var oWrap = document.getElementsByClassName('wrap')[0];
+    // oWrap.addEventListener('click', function (e) {
+    //   console.log('触发了', e);
+    // });
+    oWrap.onclick = function (e) {
+      console.log('点击事件', e.target);
+    };
+    
+    // var a = "111";
+    // console.log(a != '2' && a != '111');
+    // function fn() {
+    //   console.log(1);
+    //   try {
+    //     a = b;
+    //   } catch (e) {
+    //     console.log('自己捕获', e);
+    //   }
+    // }
+    // async function fn1() {
+    //   try {
+    //     // console.log('捕获错误');
+    //     fn();
+    //   } catch (e) {
+    //     console.log('最外层捕获到了错误', e);
+    //   }
+    // }
+    // fn1();
 
   </script>
 

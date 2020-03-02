@@ -18,6 +18,15 @@
       return "您输入的内容尚未保存，确定离开此页面吗？";
     }
     window.onbeforeunload = close;
+
+
+    //防止页面后退
+    // history.pushState(null, null, document.URL);
+    // window.addEventListener('popstate', function () {
+    //   history.pushState(null, null, document.URL);
+    // });
+
+
   </script>
 </body>
 
