@@ -297,7 +297,36 @@ var a = {
 
 
 
+var obj = {
+
+  actionerRules: [{
+    type: "member",
+    approvals: [
+      {
+        userName: "葛建辉",
+        userid: "1234"
+      }
+    ]
+  }, {
+    type: 'optional',
+    multi: 1, // 是否支持自选 0 1
+    optional: ['role', 'approvals'], // 自选范围
+    range: { //范围内容
+      role: [{
+        id: { type: String, default: null }, //自选角色ID
+        name: { type: String, default: null } //自选角色名称
+      }],
+      dep: [{
+        id: { type: String, default: null }, //ID
+        name: { type: String, default: null } //名称
+      }],
+      approvals: [{
+        id: { type: String, default: null }, //ID
+        name: { type: String, default: null } //名称
+      }]
+    }
+  }]
 
 
 
-
+}

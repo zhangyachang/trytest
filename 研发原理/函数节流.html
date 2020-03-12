@@ -57,8 +57,42 @@
       console.log('函数触发了？1111')
     }, 200);
 
-    // console.log('这个东西是什么', throFn);
-    // document.onclick = ;
+    console.log('这个东西是什么', throFn);
+    document.onclick = throttle(function () {
+      console.log('函数触发了？1111')
+    }, 200);
+
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+    throFn();
+
+    throttle(function () {
+      console.log('2')
+    }, 200)();
+    throttle(function () {
+      console.log('2')
+    }, 200)();
+    throttle(function () {
+      console.log('2')
+    }, 200)();
+    throttle(function () {
+      console.log('2')
+    }, 200)();
+    throttle(function () {
+      console.log('2')
+    }, 200)();
+    throttle(function () {
+      console.log('2')
+    }, 200)();
 
     // setInterval(throttle(() => {
     //   console.log('函数触发了？')
@@ -66,28 +100,28 @@
 
 
     /*
-      防抖函数 
+      防抖函数
       @param {Function} func 要执行的函数
       @param {Number} wait 要等待的时间 ms
     */
-    function debounce(func, wait) {
-      let timer = null;
-      return function () {
-        let context = this;
-        let args = arguments;
+    // function debounce(func, wait) {
+    //   let timer = null;
+    //   return function () {
+    //     let context = this;
+    //     let args = arguments;
 
-        timer && clearTimeout(timer);
-        timer = setTimeout(() => {
-          func.apply(context, args)
-        }, wait);
-      }
-    }
+    //     timer && clearTimeout(timer);
+    //     timer = setTimeout(() => {
+    //       func.apply(context, args)
+    //     }, wait);
+    //   }
+    // }
 
 
     // var num = 0;
-    document.getElementById('btn').onclick = debounce(function () {
-      this.innerHTML = '按钮' + num++;
-    }, 200);
+    // document.getElementById('btn').onclick = debounce(function () {
+    //   this.innerHTML = '按钮' + num++;
+    // }, 200);
 
 
   </script>

@@ -42,6 +42,31 @@ bind的返回值是一个函数，所以还是需要加上括号执行。
 
 
 
+#### 4. bind的兼容
+
+```js
+if(!-[1,]){
+    Function.prototype.bind = function(This){
+        var bindThis = this;
+        var arg = [].slice.call(arguments,1)
+        return function(){
+            bindThis.apply(This,arg);
+        }
+    }
+}
+
+var arr = [];
+box.onclick = fn.bind(arr);
+function fn(){
+    console.log(this);
+    //alert(a+b);
+}
+```
+
+
+
+
+
 #### 分析
 
 1. call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象
@@ -251,8 +276,201 @@ setInterval(function(){
 ## 日期对象
 
 > 日期对象用于处理日期和时间
+
+
+
+#### 1. 日期Date对象
+
+new Date( ) 获取的时间是本地计算机的时间，不是北京时间。
+
+要创建一个日期对象，使用 new 操作符 Date 构造函数即可。
+
+```js
+new Date();
+```
+
+
+
+#### 2. 实例化传递参数
+
+new Date() 没有参数是获取本地时间，有参数是设置参数对象时间。
+
+一个参数时，如果是字符串那就是设置年份，从1月1日开始
+
+如果一个参数时，参数的类型是number，那就是毫秒值，是距离1970,1,1,000（可能会加上时区的时差）
+
+
+
+**注意：** 传参数的时候月份要在日的前面
+
+
+
+
+
+| 参数  | 描述                                      |
+| ----- | ----------------------------------------- |
+| month | 用应为表示月份名称，从January到December   |
+| mth   | 用整数表示月份，从 0（1月） 到 11（12月） |
+| dd    | 表示一个月中的第几天 从 1到31             |
+| yyyy  | 表示一个月中的第几天，从1到31             |
+| hh    | 小时数，从0（午夜）到23（晚11点）         |
+| mm    | 分钟数，从0到59的整数                     |
+| ss    | 秒数，从0到59 的整数                      |
+| ms    | 毫秒数，为大于等于0的整数                 |
+
+
+
+```js
+var date = new Date();
+```
+
+
+
+```js
+var date = new Date("month dd,yyyy,hh:mm:ss");
+```
+
+
+
+```js
+var date = new Date("month dd,yyyy");
+```
+
+
+
+```js
+var date = new Date("yyyy month dd hh:mm:ss");
+
+var date = new Date(yyyy month dd hh:mm:ss);
+```
+
+
+
+```js
+var date = new Date(yyyy,mth,dd);
+```
+
+
+
+```js
+var data = new Date(ms);
+```
+
+
+
+
+
+#### 3. 实例化对象的方法
+
+获取日期对象的时间
+
+
+
+```js
+var date = new Date();
+```
+
+| 方法                | 返回值                                 |
+| ------------------- | -------------------------------------- |
+| date.getTime()      | 返回距离1970,1,1 00:00:00 过了多少毫秒 |
+| date.getFullYear( ) | 返回年                                 |
+| date.getMonth() + 1 | 返回月 月份从0开始 【0-11】            |
+| date.getDate()      | 返回日                                 |
+| date.getHours()     | 小时 【0-23】                          |
+| date.getMinutes();  | 返回分                                 |
+| date.getSeconds();  | 返回秒                                 |
+| date.getDay();      | 返回星期   一周的开始是周天，周天返回0 |
+
+
+
+
+
+#### 4. Date.parse()  Date.UTC()
+
+> Date.parse( ) 方法接收一个表示日期的字符串参数，然后尝试根据这个字符串返回相应日期的毫秒数。
+
+
+
+```js
+Date.parse(); // 参数必须是字符串	
+```
+
+
+
+```js
+Date.UTC(); // 参数不能是字符串
+```
+
+这两个参数都接收一个参数，参数都是日期对象，返回该日期到1970,1,1, 00:00:00的毫秒值。
+
+
+
+```js
+new Date(Date.parse("10,24,2016"));
+
+new Date(Date.UTC(2016,7,24));
+```
+
+
+
+下面的这两个UTC比parse快8个小时，这里参数选择的是-8
+
+```js
+new Date(Date.parse("10,24,2016,00:00:00"));
+
+new Date(Date.UTC(2016,9,24,-8,0,0));
+```
+
+
+
+
+
+#### 5. 日期的格式化方法
+
+> 以特定于实现的格式显示  调用方法 `date.toDateString`
+
+
+
+| 方法                 | 返回值                                           |
+| -------------------- | ------------------------------------------------ |
+| toDateString()       | Tue Sep 25 2018                                  |
+| toTimeString()       | 14:40:56 GMT+0800 (中国标准时间)                 |
+| toLocaleDateString() | 2018/9/25                                        |
+| toLocaleTimeString() | 下午2:44:00     //本地时间 时 分 秒              |
+| toUTCString          | Tue, 25 Sep 2018 06:44:56 GMT    //显示的UTC格式 |
+| toLocaleString       | 2018/9/25 下午2:46:49 //按照本地时间输出         |
+
+
+
+
+
+#### 6. getTimezoneOffset()
+
+> 返回本地时间于UTC时间相差的分钟数。单位是分
 >
-> 
+> 世界标准时间 - 本地时间 - 480
+
+
+
+本地时间与GMT时间的时间差
+
+```js
+var offset = date.getTimezoneOffset() * 60 * 1000;
+```
+
+
+
+num 时区，得到不同时区的时间
+
+```js
+var date = new Date(utcTime + 60*60*1000*num);
+```
+
+
+
+
+
+
 
 
 
